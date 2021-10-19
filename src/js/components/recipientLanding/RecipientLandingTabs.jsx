@@ -5,8 +5,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-
-import ResultsTableTabs from 'components/search/table/ResultsTableTabs';
+import { Tabs } from 'data-transparency-ui';
 import ResultsTablePicker from 'components/search/table/ResultsTablePicker';
 
 const propTypes = {
@@ -15,32 +14,26 @@ const propTypes = {
 
 const tabTypes = [
     {
-        enabled: true,
         internal: 'all',
         label: 'All Awards'
     },
     {
-        enabled: true,
         internal: 'contracts',
         label: 'Contracts'
     },
     {
-        enabled: true,
         internal: 'grants',
         label: 'Grants'
     },
     {
-        enabled: true,
         internal: 'direct_payments',
         label: 'Direct Payments'
     },
     {
-        enabled: true,
         internal: 'loans',
         label: 'Loans'
     },
     {
-        enabled: true,
         internal: 'other_financial_assistance',
         label: 'Other Financial Assistance'
     }
@@ -68,11 +61,10 @@ export default class RecipientLandingTabs extends React.Component {
     render() {
         return (
             <div className="recipient-landing__tabs">
-                <ResultsTableTabs
+                <Tabs
                     types={tabTypes}
                     active={this.state.active}
-                    switchTab={this.switchTab}
-                    hideCounts />
+                    switchTab={this.switchTab} />
                 <ResultsTablePicker
                     types={tabTypes}
                     active={this.state.active}
