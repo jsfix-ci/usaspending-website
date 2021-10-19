@@ -5,13 +5,9 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Tabs, ErrorMessage, LoadingMessage } from 'data-transparency-ui';
 
-import { CSSTransition, TransitionGroup } from 'react-transition-group';
-
-import ResultsTableLoadingMessage from 'components/search/table/ResultsTableLoadingMessage';
 import ResultsTableNoResults from 'components/search/table/ResultsTableNoResults';
-import ResultsTableErrorMessage from 'components/search/table/ResultsTableErrorMessage';
-import ResultsTableTabs from 'components/search/table/ResultsTableTabs';
 import ResultsTableBeginMessage from './ResultsTableBeginMessage';
 import ResultsTable from './ResultsTable';
 
@@ -70,6 +66,11 @@ export default class ResultsTableSection extends React.Component {
             (!this.props.error && !this.props.inFlight && this.props.results.length > 0) ||
             this.props.inFlight
         );
+        const tabsWithCounts = this.props.tableTypes.map((type) => ({
+            ...type,
+            count: this.props.counts[type.id],
+            disabled: this.props.inFlight || this.props.results.length === 0
+        }));
         return (
             <div
                 className={`search-results-table-section ${this.props.keyword ? '' : 'hide-counts'}`}
@@ -80,44 +81,31 @@ export default class ResultsTableSection extends React.Component {
                     </h2>
                 </div>
                 <hr className="results-divider" />
-                <ResultsTableTabs
-                    types={this.props.tableTypes}
+                <Tabs
+                    types={tabsWithCounts}
                     active={this.props.currentType}
-                    counts={this.props.counts}
-                    switchTab={this.props.switchTab}
-                    disabled={this.props.inFlight} />
+                    switchTab={this.props.switchTab} />
                 <div className="results-table-content">
-                    <TransitionGroup>
-                        {showTableMessage && (
-                            <CSSTransition
-                                classNames="table-message-fade"
-                                timeout={{ exit: 225, enter: 195 }}
-                                exit>
-                                    <>
-                                        {!this.props.keyword && (
-                                            <div className="results-table-message-container full">
-                                                <ResultsTableBeginMessage />
-                                            </div>
-                                        )}
-                                        {this.props.keyword && this.props.results.length === 0 && !this.props.inFlight && !this.props.error && (
-                                            <div className="results-table-message-container full">
-                                                <ResultsTableNoResults />
-                                            </div>
-                                        )}
-                                        {this.props.inFlight && (
-                                            <div className="results-table-message-container">
-                                                <ResultsTableLoadingMessage />
-                                            </div>
-                                        )}
-                                        {this.props.error && (
-                                            <div className="results-table-message-container full">
-                                                <ResultsTableErrorMessage />
-                                            </div>
-                                        )}
-                                </>
-                            </CSSTransition>
-                        )}
-                    </TransitionGroup>
+                    {showTableMessage && (
+                        <>
+                            {!this.props.keyword && (
+                                <div className="results-table-message-container full">
+                                    <ResultsTableBeginMessage />
+                                </div>
+                            )}
+                            {this.props.keyword && this.props.results.length === 0 && !this.props.inFlight && !this.props.error && (
+                                <div className="results-table-message-container full">
+                                    <ResultsTableNoResults />
+                                </div>
+                            )}
+                            {this.props.inFlight && (
+                                <LoadingMessage />
+                            )}
+                            {this.props.error && (
+                                <ErrorMessage />
+                            )}
+                        </>
+                    )}
                     <div
                         className="results-table-width-master"
                         ref={(div) => {

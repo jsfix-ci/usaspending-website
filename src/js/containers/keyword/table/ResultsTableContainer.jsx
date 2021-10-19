@@ -11,43 +11,14 @@ import * as KeywordHelper from 'helpers/keywordHelper';
 import { availableColumns, defaultSort } from 'dataMapping/keyword/resultsTableColumns';
 import { awardTypeGroups } from 'dataMapping/search/awardType';
 import { measureTableHeader } from 'helpers/textMeasurement';
-import tableTabsTooltips from 'dataMapping/shared/tableTabsTooltips';
 import Analytics from 'helpers/analytics/Analytics';
-
+import { tableTypes } from 'containers/search/table/ResultsTableContainer';
 import ResultsTableSection from 'components/keyword/table/ResultsTableSection';
 
 const propTypes = {
     keyword: PropTypes.string,
     fetchSummary: PropTypes.func
 };
-
-const tableTypes = [
-    {
-        label: 'Contracts',
-        internal: 'contracts'
-    },
-    {
-        label: 'Contract IDVs',
-        internal: 'idvs'
-    },
-    {
-        label: 'Grants',
-        internal: 'grants'
-    },
-    {
-        label: 'Direct Payments',
-        internal: 'direct_payments'
-    },
-    {
-        label: 'Loans',
-        internal: 'loans',
-        tooltip: tableTabsTooltips('loans')
-    },
-    {
-        label: 'Other',
-        internal: 'other'
-    }
-];
 
 export default class ResultsTableContainer extends React.Component {
     constructor(props) {

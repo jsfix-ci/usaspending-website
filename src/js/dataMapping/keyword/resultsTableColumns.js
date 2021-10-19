@@ -41,7 +41,7 @@ const loanColumns = [
     { title: 'Mod' },
     { title: 'Recipient Name' },
     { title: 'Action Date' },
-    { title: 'Loan Value', displayName: 'Loan Face Value' },
+    { title: 'Loan Value', displayName: 'Face Value of Loan' },
     { title: 'Subsidy Cost', displayName: 'Loan Subsidy Cost (Total Obligations To Date)' },
     { title: 'Awarding Agency' },
     { title: 'Awarding Sub Agency' },

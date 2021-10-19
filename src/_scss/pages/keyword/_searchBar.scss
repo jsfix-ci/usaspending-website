@@ -76,7 +76,6 @@
         .keyword-search-bar__icon-wrapper {
             display: inline-block;
             margin: 0 rem(5);
-            @import "keywordTooltip";
             .keyword-search-bar__icon {
                 @include button-unstyled;
                 height: rem(15);
