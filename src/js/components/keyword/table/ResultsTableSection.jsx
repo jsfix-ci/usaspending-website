@@ -5,9 +5,8 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Tabs, ErrorMessage, LoadingMessage } from 'data-transparency-ui';
+import { Tabs, ErrorMessage, LoadingMessage, NoResultsMessage } from 'data-transparency-ui';
 
-import ResultsTableNoResults from 'components/search/table/ResultsTableNoResults';
 import ResultsTableBeginMessage from './ResultsTableBeginMessage';
 import ResultsTable from './ResultsTable';
 
@@ -94,9 +93,7 @@ export default class ResultsTableSection extends React.Component {
                                 </div>
                             )}
                             {this.props.keyword && this.props.results.length === 0 && !this.props.inFlight && !this.props.error && (
-                                <div className="results-table-message-container full">
-                                    <ResultsTableNoResults />
-                                </div>
+                                <NoResultsMessage />
                             )}
                             {this.props.inFlight && (
                                 <LoadingMessage />
