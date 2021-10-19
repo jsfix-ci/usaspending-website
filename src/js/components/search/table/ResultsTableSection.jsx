@@ -5,9 +5,12 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Tabs, ErrorMessage, LoadingMessage, NoResultsMessage } from 'data-transparency-ui';
+
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import { Tabs, NoResultsMessage, ErrorMessage } from 'data-transparency-ui';
 
 import ResultsTable from './ResultsTable';
+import ResultsTableLoadingMessage from './ResultsTableLoadingMessage';
 
 const propTypes = {
     inFlight: PropTypes.bool,
@@ -76,19 +79,29 @@ export default class ResultsTableSection extends React.Component {
                     active={this.props.currentType}
                     switchTab={this.props.switchTab} />
                 <div className="results-table-content">
-                    {showTableMessage && (
-                        <>
-                            {this.props.inFlight && (
-                                <LoadingMessage />
-                            )}
-                            {this.props.error && (
-                                <ErrorMessage />
-                            )}
-                            {!this.props.error && !this.props.inFlight && this.props.results.length === 0 && (
-                                <NoResultsMessage />
-                            )}
-                        </>
-                    )}
+                    <TransitionGroup>
+                        {showTableMessage && (
+                            <CSSTransition
+                                classNames="table-message-fade"
+                                timeout={{ exit: 225, enter: 195 }}
+                                exit>
+                                <>
+                                    {this.props.inFlight && (
+                                        <div className="results-table-message-container">
+                                            <ResultsTableLoadingMessage />
+                                        </div>
+                                    )}
+                                    {this.props.error && (
+                                        <ErrorMessage />
+                                    )}
+                                    {!this.props.error && !this.props.inFlight && this.props.results.length === 0 && (
+                                        <NoResultsMessage />
+                                    )}
+                                </>
+                            </CSSTransition>
+
+                        )}
+                    </TransitionGroup>
                     <div
                         className="results-table-width-master"
                         ref={(div) => {

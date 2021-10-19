@@ -1,7 +1,6 @@
 .search-results-table-section {
     transition: opacity 0.25s ease;
     position: relative;
-    @import "_tableTypes";
     @import "_tableStyle";
     @import "_resultsDropdownPickerWrapper";
     @import "./_tableMessages";
