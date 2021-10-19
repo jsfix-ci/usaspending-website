@@ -1,16 +1,4 @@
 .topfive {
-    @import "pages/search/results/table/_tableTypes";
-
-    .table-types {
-        .table-type-toggle {
-            .tab-content {
-                .tab-label {
-                    margin-right: 0;
-                }
-            }
-        }
-    }
-
     .topfive__description {
         font-size: rem(20);
         line-height: rem(25);
