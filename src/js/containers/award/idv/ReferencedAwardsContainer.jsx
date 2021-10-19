@@ -26,18 +26,15 @@ const defaultProps = {
 const tableTypes = [
     {
         label: 'Child Award Orders',
-        internal: 'child_awards',
-        enabled: true
+        internal: 'child_awards'
     },
     {
         label: 'Child IDV Orders',
-        internal: 'child_idvs',
-        enabled: true
+        internal: 'child_idvs'
     },
     {
         label: 'Grandchild Award Orders',
-        internal: 'grandchild_awards',
-        enabled: true
+        internal: 'grandchild_awards'
     }
 ];
 
@@ -61,7 +58,6 @@ export class ReferencedAwardsContainer extends React.Component {
                 child_awards: 'desc',
                 grandchild_awards: 'desc'
             },
-            tableTypes,
             inFlight: false,
             error: false,
             results: []

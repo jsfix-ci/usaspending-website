@@ -8,7 +8,7 @@ import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { isCancel } from 'axios';
-import { TooltipWrapper } from 'data-transparency-ui';
+import { TooltipWrapper, Tabs } from 'data-transparency-ui';
 
 import * as IdvHelper from 'helpers/idvHelper';
 import { determineSpendingScenarioByAwardType } from 'helpers/awardAmountHelper';
@@ -18,7 +18,6 @@ import BaseAwardAmounts from 'models/v2/award/BaseAwardAmounts';
 
 import AggregatedAwardAmounts from 'components/award/idv/amounts/AggregatedAwardAmountsSection';
 import AwardAmountsTable from 'components/award/shared/awardAmounts/AwardAmountsTable';
-import ResultsTableTabs from 'components/search/table/ResultsTableTabs';
 import ResultsTablePicker from 'components/search/table/ResultsTablePicker';
 import { awardAmountsInfo } from 'components/award/shared/InfoTooltipContent';
 
@@ -31,12 +30,10 @@ const propTypes = {
 
 const tabTypes = [
     {
-        enabled: true,
         internal: 'awards',
         label: 'Award Orders Under this IDV'
     },
     {
-        enabled: true,
         internal: 'idv',
         label: 'This IDV'
     }
@@ -163,12 +160,11 @@ export class IdvAmountsContainer extends React.Component {
                 </div>
                 <hr />
                 <div className="award-viz__tabs">
-                    <ResultsTableTabs
+                    <Tabs
                         types={tabTypes}
                         active={this.state.active}
                         switchTab={this.switchTab}
-                        tabsClassName={tabsClassName}
-                        hideCounts />
+                        tabsClassName={tabsClassName} />
                     <ResultsTablePicker
                         types={tabTypes}
                         active={this.state.active}

@@ -5,9 +5,8 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { TooltipWrapper } from 'data-transparency-ui';
+import { TooltipWrapper, Tabs } from 'data-transparency-ui';
 
-import ResultsTableTabs from 'components/search/table/ResultsTableTabs';
 import ReferencedAwardsTable from './ReferencedAwardsTable';
 import { relatedAwardsInfo } from '../../shared/InfoTooltipContent';
 
@@ -31,12 +30,16 @@ export default class ReferencedAwardsSection extends React.Component {
     render() {
         let tabs = null;
         if (this.props.counts) {
+            const tabsWithCounts = this.props.tableTypes.map((type) => ({
+                ...type,
+                count: this.props.counts[type.internal],
+                disabled: this.props.inFlight || this.props.counts[type.internal] === 0
+            }));
             tabs = (
-                <ResultsTableTabs
+                <Tabs
                     active={this.props.tableType}
                     switchTab={this.props.switchTab}
-                    types={this.props.tableTypes}
-                    counts={this.props.counts} />
+                    types={tabsWithCounts} />
             );
         }
         return (

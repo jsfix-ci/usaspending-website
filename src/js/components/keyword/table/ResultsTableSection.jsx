@@ -67,7 +67,7 @@ export default class ResultsTableSection extends React.Component {
         );
         const tabsWithCounts = this.props.tableTypes.map((type) => ({
             ...type,
-            count: this.props.counts[type.id],
+            count: this.props.counts[type.internal],
             disabled: this.props.inFlight || this.props.results.length === 0
         }));
         return (
