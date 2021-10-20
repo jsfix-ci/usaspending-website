@@ -5,6 +5,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Tabs } from 'data-transparency-ui';
 
 import { tabs, awardTypesWithSubawards } from 'dataMapping/award/awardHistorySection';
 import { getToolTipBySectionAndAwardType } from 'dataMapping/award/tooltips';
@@ -13,7 +14,6 @@ import FederalAccountTableContainer from 'containers/award/table/FederalAccountT
 import SubawardsContainer from 'containers/award/table/SubawardsContainer';
 import ResultsTablePicker from 'components/search/table/ResultsTablePicker';
 import { AwardLoop } from 'components/sharedComponents/icons/Icons';
-import DetailsTabBar from 'components/award/table/DetailsTabBar';
 import AwardSectionHeader from 'components/award/shared/AwardSectionHeader';
 
 import { getAwardHistoryCounts } from "../../../helpers/awardHistoryHelper";
@@ -82,10 +82,10 @@ export class AwardHistory extends React.Component {
                     const { data } = await this.countRequest.promise;
                     if (isIdv && tab.internal === 'federal_account') {
                         // response object for idv federal account endpoint is { count: int }
-                        return { ...tab, count: data.count };
+                        return { ...tab, count: data.count, disabled: data.count === 0 };
                     }
                     // response object for all other count endpoints are { [tab.internal + s] int }
-                    return { ...tab, count: data[`${tab.internal}s`] };
+                    return { ...tab, count: data[`${tab.internal}s`], disabled: data[`${tab.internal}s`] === 0 };
                 }
                 catch (error) {
                     console.log(`Error fetching ${tab.internal} counts: ${error}`);
@@ -134,8 +134,7 @@ export class AwardHistory extends React.Component {
         const {
             overview,
             setActiveTab,
-            activeTab,
-            awardId
+            activeTab
         } = this.props;
         const tabOptions = this.state.tabs;
         const sectionTitle = (overview.category === 'idv')
@@ -151,11 +150,10 @@ export class AwardHistory extends React.Component {
                     tooltip={tooltip}
                     tooltipWide={(overview.category === 'contract')} />
                 <div className="tables-section">
-                    <DetailsTabBar
-                        awardId={awardId}
-                        tabOptions={tabOptions}
-                        activeTab={activeTab}
-                        clickTab={setActiveTab} />
+                    <Tabs
+                        types={tabOptions}
+                        active={activeTab}
+                        switchTab={setActiveTab} />
                     <ResultsTablePicker
                         types={tabOptions}
                         active={activeTab}

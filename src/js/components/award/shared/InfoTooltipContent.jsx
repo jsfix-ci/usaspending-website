@@ -4,281 +4,258 @@ import { uniqueId } from 'lodash';
 
 // Mapping of section identifier to tooltip content JSX
 export const transactionHistoryInfoGeneric = (
-    <div className="award-summary-tooltip transaction-history-tt">
-        <div className="tooltip__title">Transaction History</div>
-        <div className="tooltip__text">
-            <p>
-               The Transaction History tab displays modification records
-               for an award.
-            </p>
-            <p className="tooltip__text-section">
-               Each modification appears as a row in the table below.
-               Here&apos;s what each of the columns for each modification
-               (row) tell you:
-            </p>
-            <ul>
-                <li>
-                    <strong>Modification Number</strong> – This number
-                 identifies the modification with the lowest number
-                 representing the beginning of the award.
-                </li>
-                <li>
-                    <strong>Action Date</strong> – This is when the
-                 modification was obligated.
-                </li>
-                <li>
-                    <strong>Amount</strong> – This refers to the amount of
-                 money added, or subtracted, from the initial awarded
-                 amount.
-                </li>
-            </ul>
-            <p>
-                <strong>Action Type</strong> – This column describes the
-               reason behind a modification. It uses a letter code system
-               that maps to the following descriptions:
-            </p>
-            <ul className="info-tooltip__list">
-                <li>
-                    <strong>A</strong> – Additional Work
-                </li>
-                <li>
-                    <strong>B</strong> – Supplemental Agreement for work
-                 within scope
-                </li>
-                <li>
-                    <strong>C</strong> – Funding Only Action
-                </li>
-                <li>
-                    <strong>D</strong> – Change Order
-                </li>
-                <li>
-                    <strong>E</strong> – Terminate for Default (complete or
-                 partial)
-                </li>
-                <li>
-                    <strong>F</strong> – Terminate for Convenience (complete
-                 or partial)
-                </li>
-                <li>
-                    <strong>G</strong> – Exercise an Option
-                </li>
-                <li>
-                    <strong>H</strong> – Definitize Letter Contract
-                </li>
-                <li>
-                    <strong>J</strong> – Novation Agreement
-                </li>
-                <li>
-                    <strong>K</strong> – Close Out
-                </li>
-                <li>
-                    <strong>L</strong> – Definitize Change Order
-                </li>
-                <li>
-                    <strong>M</strong> – Other Administrative Action
-                </li>
-            </ul>
-            <p className="tooltip__text-section">
-                <strong>Description</strong> – This is additional
-               information typically about the effects of the
-               modifications on the contract.
-            </p>
-        </div>
-    </div>
+    <>
+        <p>
+            The Transaction History tab displays modification records
+            for an award.
+        </p>
+        <p className="tooltip__text-section">
+            Each modification appears as a row in the table below.
+            Here&apos;s what each of the columns for each modification
+            (row) tell you:
+        </p>
+        <ul>
+            <li>
+                <strong>Modification Number</strong> – This number
+                identifies the modification with the lowest number
+                representing the beginning of the award.
+            </li>
+            <li>
+                <strong>Action Date</strong> – This is when the
+                modification was obligated.
+            </li>
+            <li>
+                <strong>Amount</strong> – This refers to the amount of
+                money added, or subtracted, from the initial awarded
+                amount.
+            </li>
+        </ul>
+        <p>
+            <strong>Action Type</strong> – This column describes the
+            reason behind a modification. It uses a letter code system
+            that maps to the following descriptions:
+        </p>
+        <ul className="info-tooltip__list">
+            <li>
+                <strong>A</strong> – Additional Work
+            </li>
+            <li>
+                <strong>B</strong> – Supplemental Agreement for work
+                within scope
+            </li>
+            <li>
+                <strong>C</strong> – Funding Only Action
+            </li>
+            <li>
+                <strong>D</strong> – Change Order
+            </li>
+            <li>
+                <strong>E</strong> – Terminate for Default (complete or
+                partial)
+            </li>
+            <li>
+                <strong>F</strong> – Terminate for Convenience (complete
+                or partial)
+            </li>
+            <li>
+                <strong>G</strong> – Exercise an Option
+            </li>
+            <li>
+                <strong>H</strong> – Definitize Letter Contract
+            </li>
+            <li>
+                <strong>J</strong> – Novation Agreement
+            </li>
+            <li>
+                <strong>K</strong> – Close Out
+            </li>
+            <li>
+                <strong>L</strong> – Definitize Change Order
+            </li>
+            <li>
+                <strong>M</strong> – Other Administrative Action
+            </li>
+        </ul>
+        <p className="tooltip__text-section">
+            <strong>Description</strong> – This is additional
+            information typically about the effects of the
+            modifications on the contract.
+        </p>
+    </>
 );
 
 export const transactionHistoryInfoContract = (
-    <div className="award-summary-tooltip transaction-history-tt">
-        <div className="tooltip__title">Transaction History</div>
-        <div className="tooltip__text">
-            <p>
-                The Transaction History tab displays all modification records for
-                this contract. Most of these are financial in nature, but some may
-                be administrative only with no financial implications
-                (e.g., noting an address change by the recipient).
-            </p>
-            <p className="tooltip__text-section">
-                Each modification appears as a row in the table below.
-                Here&apos;s what the columns for each modification (row) tell you:
-            </p>
-            <ul>
-                <li>
-                    <strong>Modification Number</strong> – This number
-                    identifies the modification. Modification numbers increment
-                    from lower to higher as more mods are made.
-                </li>
-                <li>
-                    <strong>Action Date</strong> – This is when the
-                    modification was issued.
-                </li>
-                <li>
-                    <strong>Amount</strong> – This refers to the amount of
-                money added or subtracted from the initial awarded
-                amount by the modification, if any.
-                </li>
-            </ul>
-            <p>
-                <strong>Action Type</strong> – This column describes the
-              type of modification. It uses a letter code system
-              that maps to the following descriptions. For more on the
-              meaning of these descriptions, refer to Acquisition.gov:
-            </p>
-            <ul className="info-tooltip__list">
-                <li>
-                    <strong>A</strong> – Additional Work
-                </li>
-                <li>
-                    <strong>B</strong> – Supplemental Agreement for work
-                within scope
-                </li>
-                <li>
-                    <strong>C</strong> – Funding Only Action
-                </li>
-                <li>
-                    <strong>D</strong> – Change Order
-                </li>
-                <li>
-                    <strong>E</strong> – Terminate for Default (complete or
-                partial)
-                </li>
-                <li>
-                    <strong>F</strong> – Terminate for Convenience (complete
-                or partial)
-                </li>
-                <li>
-                    <strong>G</strong> – Exercise an Option
-                </li>
-                <li>
-                    <strong>H</strong> – Definitize Letter Contract
-                </li>
-                <li>
-                    <strong>J</strong> – Novation Agreement
-                </li>
-                <li>
-                    <strong>K</strong> – Close Out
-                </li>
-                <li>
-                    <strong>L</strong> – Definitize Change Order
-                </li>
-                <li>
-                    <strong>M</strong> – Other Administrative Action
-                </li>
-            </ul>
-            <p>
-                <strong>Description</strong> – Describes the modification,
-                typically covering its effect on the contract.
-            </p>
-        </div>
-    </div>
+    <>
+        <p>
+            The Transaction History tab displays all modification records for
+            this contract. Most of these are financial in nature, but some may
+            be administrative only with no financial implications
+            (e.g., noting an address change by the recipient).
+        </p>
+        <p className="tooltip__text-section">
+            Each modification appears as a row in the table below.
+            Here&apos;s what the columns for each modification (row) tell you:
+        </p>
+        <ul>
+            <li>
+                <strong>Modification Number</strong> – This number
+                identifies the modification. Modification numbers increment
+                from lower to higher as more mods are made.
+            </li>
+            <li>
+                <strong>Action Date</strong> – This is when the
+                modification was issued.
+            </li>
+            <li>
+                <strong>Amount</strong> – This refers to the amount of
+            money added or subtracted from the initial awarded
+            amount by the modification, if any.
+            </li>
+        </ul>
+        <p>
+            <strong>Action Type</strong> – This column describes the
+            type of modification. It uses a letter code system
+            that maps to the following descriptions. For more on the
+            meaning of these descriptions, refer to Acquisition.gov:
+        </p>
+        <ul className="info-tooltip__list">
+            <li>
+                <strong>A</strong> – Additional Work
+            </li>
+            <li>
+                <strong>B</strong> – Supplemental Agreement for work
+            within scope
+            </li>
+            <li>
+                <strong>C</strong> – Funding Only Action
+            </li>
+            <li>
+                <strong>D</strong> – Change Order
+            </li>
+            <li>
+                <strong>E</strong> – Terminate for Default (complete or
+            partial)
+            </li>
+            <li>
+                <strong>F</strong> – Terminate for Convenience (complete
+            or partial)
+            </li>
+            <li>
+                <strong>G</strong> – Exercise an Option
+            </li>
+            <li>
+                <strong>H</strong> – Definitize Letter Contract
+            </li>
+            <li>
+                <strong>J</strong> – Novation Agreement
+            </li>
+            <li>
+                <strong>K</strong> – Close Out
+            </li>
+            <li>
+                <strong>L</strong> – Definitize Change Order
+            </li>
+            <li>
+                <strong>M</strong> – Other Administrative Action
+            </li>
+        </ul>
+        <p>
+            <strong>Description</strong> – Describes the modification,
+            typically covering its effect on the contract.
+        </p>
+    </>
 );
 
 export const transactionHistoryInfoFinancialAssistance = (
-    <div className="award-summary-tooltip transaction-history-tt">
-        <div className="tooltip__title">Transaction History</div>
-        <div className="tooltip__text">
-            <p>
-                The Transaction History tab displays all modification
-                records for this award. Most of these are financial in
-                nature, but some may be administrative only with no
-                financial implications (e.g., noting an address change by the recipient).
-            </p>
-            <p>
-                Each modification appears as a row in the table below.
-                Here&apos;s what the columns for each modification (row) tell you:
-            </p>
-            <ul>
-                <li>
-                    <strong>Modification Number</strong> – This number
-                    identifies the modification. Modification numbers increment
-                    from lower to higher as more mods are made.
-                </li>
-                <li>
-                    <strong>Action Date</strong> – This is when the
-                    modification was issued.
-                </li>
-                <li>
-                    <strong>Amount</strong> – This refers to the amount of
-                money added or subtracted from the initial awarded
-                amount by the modification, if any.
-                </li>
-            </ul>
-            <p>
-                <strong>Action Type</strong> – This column describes the
-              type of modification. It uses a letter code system
-              that maps to the following descriptions:
-            </p>
-            <ul className="info-tooltip__list">
-                <li>
-                    <strong>A</strong> – New assistance award
-                </li>
-                <li>
-                    <strong>B</strong> – Continuation
-                </li>
-                <li>
-                    <strong>C</strong> – Revision
-                </li>
-                <li>
-                    <strong>D</strong> – Funding adjustment to a completed project
-                </li>
-            </ul>
-            <p>
-                <strong>Description</strong> – Describes the modification,
-                typically covering its effect on the award.
-            </p>
-            <p>
-                <strong>Loan Face Value</strong> - The Face Value of a loan represents how much has actually been lent out to
-                the entity that received the loan dollars. Sometimes loans are financed by a
-                financial institution (with the Federal government merely providing a &#39;loan
-                guarantee&#39; to the financial institution and reimbursement in cases where the
-                loan isn&#39;t paid back), and other times they are financed by the Federal
-                government directly (direct loans). Regardless of how it is financed,
-                a loan&#39;s face value is not considered Federal spending, because
-                it does not, in itself, represent a long-term cost to the government. The
-                estimated long-term cost to the government of a loan is captured
-                in the subsidy cost field.
-            </p>
-            <p>
-                <strong>Loan Subsidy Cost (Total Obligations To Date)</strong> - The implications of a loan or loan guarantee for the Federal Budget (and thus the
-            loan version of spending/obligations) are known as the loan&#39;s subsidy
-            cost. Subsidy cost is the calculated net present value of the loan to the
-            government, taking into account the interest rate and the modeled risk of the
-            recipient failing to pay back the loan in part or full; subsidy cost can be
-            positive (indicating that the government is likely to lose money on the loan) or
-            negative (indicating that the government is likely to make money on the
-            loan). Subsidy cost should never be larger in absolute value terms than
-            the face value itself. Administrative costs of running the loan or loan
-            guarantee program itself are excluded from subsidy cost calculations. Note
-            that a loan&#39;s face value is not considered Federal spending, since it
-            does not in itself represent a long-term cost to the government.
-            </p>
-        </div>
-    </div>
+    <>
+        <p>
+            The Transaction History tab displays all modification
+            records for this award. Most of these are financial in
+            nature, but some may be administrative only with no
+            financial implications (e.g., noting an address change by the recipient).
+        </p>
+        <p>
+            Each modification appears as a row in the table below.
+            Here&apos;s what the columns for each modification (row) tell you:
+        </p>
+        <ul>
+            <li>
+                <strong>Modification Number</strong> – This number
+                identifies the modification. Modification numbers increment
+                from lower to higher as more mods are made.
+            </li>
+            <li>
+                <strong>Action Date</strong> – This is when the
+                modification was issued.
+            </li>
+            <li>
+                <strong>Amount</strong> – This refers to the amount of
+            money added or subtracted from the initial awarded
+            amount by the modification, if any.
+            </li>
+        </ul>
+        <p>
+            <strong>Action Type</strong> – This column describes the
+            type of modification. It uses a letter code system
+            that maps to the following descriptions:
+        </p>
+        <ul className="info-tooltip__list">
+            <li>
+                <strong>A</strong> – New assistance award
+            </li>
+            <li>
+                <strong>B</strong> – Continuation
+            </li>
+            <li>
+                <strong>C</strong> – Revision
+            </li>
+            <li>
+                <strong>D</strong> – Funding adjustment to a completed project
+            </li>
+        </ul>
+        <p>
+            <strong>Description</strong> – Describes the modification,
+            typically covering its effect on the award.
+        </p>
+        <p>
+            <strong>Loan Face Value</strong> - The Face Value of a loan represents how much has actually been lent out to
+            the entity that received the loan dollars. Sometimes loans are financed by a
+            financial institution (with the Federal government merely providing a &#39;loan
+            guarantee&#39; to the financial institution and reimbursement in cases where the
+            loan isn&#39;t paid back), and other times they are financed by the Federal
+            government directly (direct loans). Regardless of how it is financed,
+            a loan&#39;s face value is not considered Federal spending, because
+            it does not, in itself, represent a long-term cost to the government. The
+            estimated long-term cost to the government of a loan is captured
+            in the subsidy cost field.
+        </p>
+        <p>
+            <strong>Loan Subsidy Cost (Total Obligations To Date)</strong> - The implications of a loan or loan guarantee for the Federal Budget (and thus the
+        loan version of spending/obligations) are known as the loan&#39;s subsidy
+        cost. Subsidy cost is the calculated net present value of the loan to the
+        government, taking into account the interest rate and the modeled risk of the
+        recipient failing to pay back the loan in part or full; subsidy cost can be
+        positive (indicating that the government is likely to lose money on the loan) or
+        negative (indicating that the government is likely to make money on the
+        loan). Subsidy cost should never be larger in absolute value terms than
+        the face value itself. Administrative costs of running the loan or loan
+        guarantee program itself are excluded from subsidy cost calculations. Note
+        that a loan&#39;s face value is not considered Federal spending, since it
+        does not in itself represent a long-term cost to the government.
+        </p>
+    </>
 );
 
 export const federalAccountFundingInfoIDV = (
-    <div className="award-summary-tooltip">
-        <div className="tooltip__title">
-            Federal Account Funding
-        </div>
-        <div className="tooltip__text">
-            <p>
-                Each row in this table shows a transaction in the awarding agency&rsquo;s financial system that promises spending for the award from a federal account (a rollup of TAS, or Treasury accounts), broken down by program activity and object class.
-            </p>
-        </div>
-    </div>
+    <p>
+        Each row in this table shows a transaction in the awarding agency&rsquo;s financial system that promises spending for the award from a federal account (a rollup of TAS, or Treasury accounts), broken down by program activity and object class.
+    </p>
 );
 
 export const federalAccountFundingInfoGeneric = (
-    <div className="award-summary-tooltip">
-        <div className="tooltip__title">
-            Federal Account Funding
-        </div>
-        <div className="tooltip__text">
-            <p>
-                Each row in this table shows a transaction in the awarding agency&rsquo;s financial system that promises spending for the award from a federal account (a rollup of TAS, or Treasury accounts), broken down by program activity and object class.
-            </p>
-        </div>
-    </div>
+    <p>
+        Each row in this table shows a transaction in the awarding agency&rsquo;s financial system that promises spending for the award from a federal account (a rollup of TAS, or Treasury accounts), broken down by program activity and object class.
+    </p>
 );
 
 export const relatedAwardsInfo = (
@@ -1034,87 +1011,81 @@ export const federalAccountsInfoIdv = (
 );
 
 export const subAwardsTabContract = (
-    <div className="award-summary-tooltip">
-        <div className="tooltip__title">Sub-Awards</div>
-        <div className="tooltip__text">
-            <p>
-                The Sub-Awards tab displays any sub-contracts reported by this contract&apos;s
-                recipient (the ‘prime recipient&apos; in a sub-award context). Sub-contracts are
-                contractual agreements that a prime recipient makes with another entity
-                (sub-recipient) to furnish supplies or services for the prime contract.
-            </p>
-            <p>
-                Above the Sub-Award table, we display the total number of reported
-                sub-contract actions and their total value.
-            </p>
-            <p>
-                Here&apos;s what the columns for each sub-contract action tell you:
-            </p>
-            <ul>
-                <li>
-                    <strong>Sub-Award ID</strong> – The sub-award ID number chosen
-                    by the prime recipient for this transaction.
-                </li>
-                <li>
-                    <strong>Sub-Recipient Name</strong> – The name of the sub-recipient.
-                </li>
-                <li>
-                    <strong>Action Date</strong> - The date when the sub-contract was issued.
-                </li>
-                <li>
-                    <strong>Amount</strong> – The amount of money involved
-                    in the sub-contract action.
-                </li>
-                <li>
-                    <strong>Description</strong> – The description of the sub-contract
-                    provided by the prime recipient.
-                    The level of detail in descriptions varies and is dependent on the author.
-                </li>
-            </ul>
-        </div>
-    </div>
+    <>
+        <p>
+            The Sub-Awards tab displays any sub-contracts reported by this contract&apos;s
+            recipient (the ‘prime recipient&apos; in a sub-award context). Sub-contracts are
+            contractual agreements that a prime recipient makes with another entity
+            (sub-recipient) to furnish supplies or services for the prime contract.
+        </p>
+        <p>
+            Above the Sub-Award table, we display the total number of reported
+            sub-contract actions and their total value.
+        </p>
+        <p>
+            Here&apos;s what the columns for each sub-contract action tell you:
+        </p>
+        <ul>
+            <li>
+                <strong>Sub-Award ID</strong> – The sub-award ID number chosen
+                by the prime recipient for this transaction.
+            </li>
+            <li>
+                <strong>Sub-Recipient Name</strong> – The name of the sub-recipient.
+            </li>
+            <li>
+                <strong>Action Date</strong> - The date when the sub-contract was issued.
+            </li>
+            <li>
+                <strong>Amount</strong> – The amount of money involved
+                in the sub-contract action.
+            </li>
+            <li>
+                <strong>Description</strong> – The description of the sub-contract
+                provided by the prime recipient.
+                The level of detail in descriptions varies and is dependent on the author.
+            </li>
+        </ul>
+    </>
 );
 
 export const subAwardsTabGrant = (
-    <div className="award-summary-tooltip">
-        <div className="tooltip__title">Sub-Awards</div>
-        <div className="tooltip__text">
-            <p>
-            The Sub-Awards tab displays any sub-grants reported by this grant&apos;s
-            recipient (the “prime recipient” in a sub-award context). Sub-grants
-            are awards of financial assistance made under a grant by
-            a prime grantee to an eligible subgrantee.
-            </p>
-            <p>
-                Above the Sub-Award table, we display the total number of reported
-                sub-grant actions and their total value.
-            </p>
-            <p>
-                Here&apos;s what the columns for each sub-grant action tell you:
-            </p>
-            <ul>
-                <li>
-                    <strong>Sub-Award ID</strong> – The sub-award ID number chosen
-                    by the prime recipient for this transaction.
-                </li>
-                <li>
-                    <strong>Sub-Recipient Name</strong> – The name of the sub-recipient.
-                </li>
-                <li>
-                    <strong>Action Date</strong> - The date when the sub-grant was issued.
-                </li>
-                <li>
-                    <strong>Amount</strong> – The amount of money involved
-                    in the sub-grant action.
-                </li>
-                <li>
-                    <strong>Description</strong> – The description of the sub-grant
-                    provided by the prime recipient.
-                    The level of detail in descriptions varies and is dependent on the author.
-                </li>
-            </ul>
-        </div>
-    </div>
+    <>
+        <p>
+        The Sub-Awards tab displays any sub-grants reported by this grant&apos;s
+        recipient (the “prime recipient” in a sub-award context). Sub-grants
+        are awards of financial assistance made under a grant by
+        a prime grantee to an eligible subgrantee.
+        </p>
+        <p>
+            Above the Sub-Award table, we display the total number of reported
+            sub-grant actions and their total value.
+        </p>
+        <p>
+            Here&apos;s what the columns for each sub-grant action tell you:
+        </p>
+        <ul>
+            <li>
+                <strong>Sub-Award ID</strong> – The sub-award ID number chosen
+                by the prime recipient for this transaction.
+            </li>
+            <li>
+                <strong>Sub-Recipient Name</strong> – The name of the sub-recipient.
+            </li>
+            <li>
+                <strong>Action Date</strong> - The date when the sub-grant was issued.
+            </li>
+            <li>
+                <strong>Amount</strong> – The amount of money involved
+                in the sub-grant action.
+            </li>
+            <li>
+                <strong>Description</strong> – The description of the sub-grant
+                provided by the prime recipient.
+                The level of detail in descriptions varies and is dependent on the author.
+            </li>
+        </ul>
+    </>
 );
 
 export const ContractAwardAmountsInfo = (

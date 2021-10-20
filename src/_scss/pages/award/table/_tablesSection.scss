@@ -9,6 +9,21 @@
         width: 100%;
     }
 
+    .usa-dt-tab-list {
+        .tooltip-wrapper {
+            display: none;
+        }
+        .tooltip__text {
+            white-space: normal;
+        }
+        @media (min-width: $tablet-screen) {
+            overflow: visible; // so that tooltips don't get cut off
+            .tooltip-wrapper {
+                display: block;
+            }
+        }
+    }
+
     .table-message {
         margin-top: 1rem;
         font-size: $small-font-size;
@@ -21,17 +36,6 @@
     @import "pages/search/results/table/_resultsTablePicker";
 
     @import "../../search/results/table/tableMessages";
-
-    .table-types {
-        @include display(flex);
-
-        .table-type-toggle {
-            @include display(flex);
-            .tab-content span {
-                margin-right: $global-mrg / 3;
-            }
-        }
-    }
 
     .results-table-message-container {
         position: relative;

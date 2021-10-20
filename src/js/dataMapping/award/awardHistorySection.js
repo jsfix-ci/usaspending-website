@@ -4,23 +4,17 @@ export const tabs = (awardType) => [
     {
         label: "Transaction History",
         internal: "transaction",
-        enabled: true,
-        tooltipContent: getToolTipBySectionAndAwardType('transactionHistory', awardType),
-        tooltipProps: { wide: true }
+        tooltip: getToolTipBySectionAndAwardType('transactionHistory', awardType)
     },
     {
         label: "Sub-Awards",
         internal: "subaward",
-        enabled: true,
-        tooltipContent: getToolTipBySectionAndAwardType('subAwards', awardType),
-        tooltipProps: { wide: true }
+        tooltip: getToolTipBySectionAndAwardType('subAwards', awardType)
     },
     {
         label: "Federal Account Funding",
         internal: "federal_account",
-        enabled: true,
-        tooltipContent: getToolTipBySectionAndAwardType('federalAccountFunding', awardType),
-        tooltipProps: { wide: true }
+        tooltip: getToolTipBySectionAndAwardType('federalAccountFunding', awardType)
     }
 ];
 
