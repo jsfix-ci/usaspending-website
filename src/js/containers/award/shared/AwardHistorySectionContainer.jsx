@@ -12,7 +12,6 @@ import { getToolTipBySectionAndAwardType } from 'dataMapping/award/tooltips';
 import TransactionsTableContainer from 'containers/award/table/TransactionsTableContainer';
 import FederalAccountTableContainer from 'containers/award/table/FederalAccountTableContainer';
 import SubawardsContainer from 'containers/award/table/SubawardsContainer';
-import ResultsTablePicker from 'components/search/table/ResultsTablePicker';
 import { AwardLoop } from 'components/sharedComponents/icons/Icons';
 import AwardSectionHeader from 'components/award/shared/AwardSectionHeader';
 
@@ -151,10 +150,6 @@ export class AwardHistory extends React.Component {
                     tooltipWide={(overview.category === 'contract')} />
                 <div className="tables-section">
                     <Tabs
-                        types={tabOptions}
-                        active={activeTab}
-                        switchTab={setActiveTab} />
-                    <ResultsTablePicker
                         types={tabOptions}
                         active={activeTab}
                         switchTab={setActiveTab} />

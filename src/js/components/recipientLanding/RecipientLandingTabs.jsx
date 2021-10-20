@@ -6,7 +6,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Tabs } from 'data-transparency-ui';
-import ResultsTablePicker from 'components/search/table/ResultsTablePicker';
 
 const propTypes = {
     setTab: PropTypes.func
@@ -60,16 +59,10 @@ export default class RecipientLandingTabs extends React.Component {
 
     render() {
         return (
-            <div className="recipient-landing__tabs">
-                <Tabs
-                    types={tabTypes}
-                    active={this.state.active}
-                    switchTab={this.switchTab} />
-                <ResultsTablePicker
-                    types={tabTypes}
-                    active={this.state.active}
-                    switchTab={this.switchTab} />
-            </div>
+            <Tabs
+                types={tabTypes}
+                active={this.state.active}
+                switchTab={this.switchTab} />
         );
     }
 }

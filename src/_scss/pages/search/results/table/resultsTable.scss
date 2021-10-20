@@ -2,7 +2,6 @@
     transition: opacity 0.25s ease;
     position: relative;
     @import "_tableStyle";
-    @import "_resultsDropdownPickerWrapper";
     @import "./_tableMessages";
     .results-table-content {
         position: relative;

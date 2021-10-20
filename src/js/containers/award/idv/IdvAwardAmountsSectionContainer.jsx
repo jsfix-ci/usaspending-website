@@ -18,7 +18,6 @@ import BaseAwardAmounts from 'models/v2/award/BaseAwardAmounts';
 
 import AggregatedAwardAmounts from 'components/award/idv/amounts/AggregatedAwardAmountsSection';
 import AwardAmountsTable from 'components/award/shared/awardAmounts/AwardAmountsTable';
-import ResultsTablePicker from 'components/search/table/ResultsTablePicker';
 import { awardAmountsInfo } from 'components/award/shared/InfoTooltipContent';
 
 const propTypes = {
@@ -159,17 +158,11 @@ export class IdvAmountsContainer extends React.Component {
                         tooltipComponent={awardAmountsInfo} />
                 </div>
                 <hr />
-                <div className="award-viz__tabs">
-                    <Tabs
-                        types={tabTypes}
-                        active={this.state.active}
-                        switchTab={this.switchTab}
-                        tabsClassName={tabsClassName} />
-                    <ResultsTablePicker
-                        types={tabTypes}
-                        active={this.state.active}
-                        switchTab={this.switchTab} />
-                </div>
+                <Tabs
+                    types={tabTypes}
+                    active={this.state.active}
+                    switchTab={this.switchTab}
+                    tabsClassName={tabsClassName} />
                 {this.state.active === 'awards' && (
                     <AggregatedAwardAmounts
                         {...this.state}
