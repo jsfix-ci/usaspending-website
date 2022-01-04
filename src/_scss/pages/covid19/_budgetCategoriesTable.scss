@@ -39,32 +39,37 @@
     }
 
     .budget-categories__content {
+
         .usda-table {
             margin-top: 0;
-            td {
-                &:first-child {
-                    @include span-columns(6 of 12, table);
-
-                    p {
-                        a {
-                            // IE11 fix for td not having the correct width
-                            @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
-                                max-width: 50%;
-                            }
-                        }
-                    }
-                }
-                @include span-columns(2 of 12, table);
-            }
-
-            .usda-table__body {
-                tr.usda-table__row {
-                    td.usda-table__cell {
-                        padding-left: rem(15);
-                    }
-                }
-            }
         }
+
+        // .usda-table {
+        //     margin-top: 0;
+        //     td {
+        //         &:first-child {
+        //             @include span-columns(6 of 12, table);
+
+        //             p {
+        //                 a {
+        //                     // IE11 fix for td not having the correct width
+        //                     @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+        //                         max-width: 50%;
+        //                     }
+        //                 }
+        //             }
+        //         }
+        //         @include span-columns(2 of 12, table);
+        //     }
+
+        //     .usda-table__body {
+        //         tr.usda-table__row {
+        //             td.usda-table__cell {
+        //                 padding-left: rem(15);
+        //             }
+        //         }
+        //     }
+        // }
     }
 
     .overview-data {

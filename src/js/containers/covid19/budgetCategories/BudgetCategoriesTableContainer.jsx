@@ -416,7 +416,9 @@ const BudgetCategoriesTableContainer = (props) => {
                     updateSort={updateSort}
                     divider={props.subHeading}
                     loading={loading}
-                    error={error} />
+                    error={error}
+                    screenReaderCaption="Total Spending by Budget Category"
+                    isStacked />
             </div>
             <Pagination
                 currentPage={currentPage}
