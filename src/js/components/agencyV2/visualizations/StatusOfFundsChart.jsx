@@ -314,6 +314,7 @@ const StatusOfFundsChart = ({
     };
 
     useEffect(() => {
+        console.log(results);
         if (results?.length > 0) {
             renderChart();
         }
