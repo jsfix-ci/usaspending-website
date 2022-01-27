@@ -1,7 +1,7 @@
 FROM node:14.17.0
 
-ARG api_environment=prod
-ARG api_url=https://api.usaspending.gov/api/
+ARG api_environment=qat
+ARG api_url=https://qat-api.usaspending.gov/api/
 
 # Default environment variables
 ENV ENV=${api_environment}
