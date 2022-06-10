@@ -14,7 +14,7 @@
     <meta name="twitter:site" value="@usaspending" />
 
     <title>USAspending.gov</title>
-    <link href="https://api.mapbox.com/mapbox-gl-js/v1.13.0/mapbox-gl.css" rel="stylesheet" />
+    <link href="https://api.mapbox.com/mapbox-gl-js/v1.13.0/mapbox-gl.css" rel="preload" />
     <link rel="shortcut icon" href="img/favicon.ico">
 
     <script async type="text/javascript" id="_fed_an_ua_tag"
@@ -36,7 +36,7 @@
             ;(function (g) {
                 var d = document, am = d.createElement('script'), h = d.head || d.getElementsByTagName("head")[0], fsr = 'fsReady',
                     aex = {
-                        "src": "//gateway.foresee.com/sites/usaspending/production/gateway.min.js",
+                        "src": "https://gateway.foresee.com/sites/usaspending/production/gateway.min.js",
                         "type": "text/javascript",
                         "async": "true",
                         "data-vendor": "fs",
@@ -60,7 +60,7 @@
             ;(function (g) {
                 var d = document, am = d.createElement('script'), h = d.head || d.getElementsByTagName("head")[0], fsr = 'fsReady',
                     aex = {
-                        "src": "//gateway.foresee.com/sites/usaspending/staging/gateway.min.js",
+                        "src": "https://gateway.foresee.com/sites/usaspending/staging/gateway.min.js",
                         "type": "text/javascript",
                         "async": "true",
                         "data-vendor": "fs",

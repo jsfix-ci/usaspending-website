@@ -1,5 +1,6 @@
 const merge = require('webpack-merge');
 const webpack = require('webpack');
+const CompressionPlugin = require("compression-webpack-plugin");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 // const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
@@ -57,6 +58,7 @@ module.exports = merge(common, {
         ]
     },
     plugins: [
+        new CompressionPlugin(),
         new MiniCssExtractPlugin({
             filename: "[name].[contenthash].css"
         }),

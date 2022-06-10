@@ -1,5 +1,6 @@
 const webpack = require('webpack');
 const path = require('path');
+const CompressionPlugin = require('compression-webpack-plugin');
 const merge = require('webpack-merge');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 // const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
@@ -44,6 +45,7 @@ module.exports = merge(common, {
     },
     plugins: [
         // new BundleAnalyzerPlugin(), // Webpack bundle volume analysis
+        new CompressionPlugin(),
         new webpack.DefinePlugin({
             'process.env': {
                 USASPENDING_API: process.env.USASPENDING_API
