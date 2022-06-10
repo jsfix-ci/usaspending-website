@@ -212,6 +212,9 @@
                 }
               }
           }
+          .mapboxgl-control-container {
+            display: none !important;
+          }
           //HIDE THE MAPBOX COMPASS CONTROLS
           & .mapboxgl-ctrl-compass {
               display: none !important;
