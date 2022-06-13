@@ -60,10 +60,13 @@ const HorizontalSingleStackedBarViz = ({
     const currentAmountLabel = numerator.text;
     const outlayedAmountValue = numerator2.value;
     const outlayedAmountLabel = numerator2.text;
+    const outlayedAmountColor = numerator2.color;
     const obligatedAmountValue = numerator.children[0].value;
     const obligatedAmountLabel = numerator.children[0].text;
+    const obligatedAmountColor = numerator.children[0].color;
     const potentialAmountValue = denominator.value;
     const potentialAmountLabel = denominator.text;
+    const potentialAmountColor = denominator.color;
     const isNffZero = numerator.className === 'asst-non-federal-funding' && numerator.value === '$0';
 
     useEffect(() => {
@@ -73,12 +76,13 @@ const HorizontalSingleStackedBarViz = ({
             const chartSvg = d3.select('#aa_chart')
                 .append('svg')
                 .attr("height", height)
-                .attr("width", '100%');
+                .attr("width", "100%");
             // set x scale (potential amount as max domain)
             const x = scaleLinear()
                 .range([0, windowWidth]);
             x.domain([0, propsArr[0]]);
             // parent g for nested bars (adjust y and height by constant factor to add more layers)
+            // This does nothing
             chartSvg.append('g')
                 .attr('class', 'parent-g')
                 .selectAll('.bar-group');
@@ -88,7 +92,7 @@ const HorizontalSingleStackedBarViz = ({
                 .attr("y", height / 2.5)
                 .attr("width", x(propsArr[0]))
                 .attr("height", '50')
-                .attr("fill", "#dce4ee");
+                .attr("fill", potentialAmountColor);
             // grants, direct payments, other
             if (numerator.className === "asst-non-federal-funding") {
                 // obligated rect
@@ -97,14 +101,14 @@ const HorizontalSingleStackedBarViz = ({
                     .attr("y", (height / 2.5) + 5)
                     .attr("width", x(propsArr[2]))
                     .attr("height", '40')
-                    .attr("fill", "#4773aa");
+                    .attr("fill", obligatedAmountColor);
                 // outlayed rect
                 chartSvg.append("rect")
                     .attr("x", 0)
                     .attr("y", (height / 2.5) + 10)
                     .attr("width", x(propsArr[3]))
                     .attr("height", '30')
-                    .attr("fill", "#0b2e5a");
+                    .attr("fill", outlayedAmountColor);
                 if (!isNffZero) {
                     // nff rect
                     chartSvg.append("rect")
@@ -135,7 +139,7 @@ const HorizontalSingleStackedBarViz = ({
                     .attr("x2", x(propsArr[0]) - 2)
                     .attr("y2", height - 50)
                     .style("stroke-width", 4)
-                    .style("stroke", "#dce4ee")
+                    .style("stroke", potentialAmountColor)
                     .style("fill", "none");
                 // outlay line
                 chartSvg.append("line")
@@ -144,7 +148,7 @@ const HorizontalSingleStackedBarViz = ({
                     .attr("x2", x(propsArr[3]) - 2)
                     .attr("y2", (height / 2.5) + 35)
                     .style("stroke-width", 4)
-                    .style("stroke", "#0b2e5a")
+                    .style("stroke", outlayedAmountColor)
                     .style("fill", "none");
                 // obligated line
                 chartSvg.append("line")
@@ -153,7 +157,7 @@ const HorizontalSingleStackedBarViz = ({
                     .attr("x2", x(propsArr[2]) - 2)
                     .attr("y2", (height / 2.5) + 45)
                     .style("stroke-width", 4)
-                    .style("stroke", "#4773aa")
+                    .style("stroke", obligatedAmountColor)
                     .style("fill", "none");
                 if (!isNffZero) {
                     // current line
@@ -188,19 +192,23 @@ const HorizontalSingleStackedBarViz = ({
                     .attr("height", '40')
                     .attr("fill", "#8aa6c9");
                 // obligated rect
-                chartSvg.append("rect")
-                    .attr("x", 0)
-                    .attr("y", (height / 2.5) + 10)
-                    .attr("width", x(propsArr[2]))
-                    .attr("height", '30')
-                    .attr("fill", "#4773aa");
+                if (obligatedAmountValue.indexOf("$0") < 0) {
+                    chartSvg.append("rect")
+                        .attr("x", 0)
+                        .attr("y", (height / 2.5) + 10)
+                        .attr("width", x(propsArr[2]))
+                        .attr("height", '30')
+                        .attr("fill", obligatedAmountColor);
+                }
                 // outlayed rect
-                chartSvg.append("rect")
-                    .attr("x", 0)
-                    .attr("y", (height / 2.5) + 15)
-                    .attr("width", x(propsArr[3]))
-                    .attr("height", '20')
-                    .attr("fill", "#0b2e5a");
+                if (outlayedAmountValue.indexOf("$0") < 0) {
+                    chartSvg.append("rect")
+                        .attr("x", 0)
+                        .attr("y", (height / 2.5) + 15)
+                        .attr("width", x(propsArr[3]))
+                        .attr("height", '20')
+                        .attr("fill", outlayedAmountColor);
+                }
                 // potential line
                 chartSvg.append("line")
                     .attr("x1", x(propsArr[0]) - 2)
@@ -208,7 +216,7 @@ const HorizontalSingleStackedBarViz = ({
                     .attr("x2", x(propsArr[0]) - 2)
                     .attr("y2", height - 50)
                     .style("stroke-width", 4)
-                    .style("stroke", "#dce4ee")
+                    .style("stroke", potentialAmountColor)
                     .style("fill", "none");
                 // current line
                 chartSvg.append("line")
@@ -219,24 +227,28 @@ const HorizontalSingleStackedBarViz = ({
                     .style("stroke-width", 4)
                     .style("stroke", numerator.className === "asst-non-federal-funding" ? "#47AAA7" : "#8aa6c9")
                     .style("fill", "none");
-                // outlay line
-                chartSvg.append("line")
-                    .attr("x1", x(propsArr[3]) - 2)
-                    .attr("y1", 20)
-                    .attr("x2", x(propsArr[3]) - 2)
-                    .attr("y2", (height / 2.5) + 35)
-                    .style("stroke-width", 4)
-                    .style("stroke", "#0b2e5a")
-                    .style("fill", "none");
                 // obligated line
-                chartSvg.append("line")
-                    .attr("x1", x(propsArr[2]) - 2)
-                    .attr("y1", 90)
-                    .attr("x2", x(propsArr[2]) - 2)
-                    .attr("y2", (height / 2.5) + 40)
-                    .style("stroke-width", 4)
-                    .style("stroke", "#4773aa")
-                    .style("fill", "none");
+                if (obligatedAmountValue.indexOf("$0") < 0) {
+                    chartSvg.append("line")
+                        .attr("x1", x(propsArr[2]) > 100 ? x(propsArr[2]) - 2 : x(propsArr[2]) + 2)
+                        .attr("y1", 90)
+                        .attr("x2", x(propsArr[2]) > 100 ? x(propsArr[2]) - 2 : x(propsArr[2]) + 2)
+                        .attr("y2", (height / 2.5) + 40)
+                        .style("stroke-width", 4)
+                        .style("stroke", obligatedAmountColor)
+                        .style("fill", "none");
+                }
+                // outlay line
+                if (outlayedAmountValue.indexOf("$0") < 0) {
+                    chartSvg.append("line")
+                        .attr("x1", x(propsArr[3]) > 100 ? x(propsArr[3]) - 2 : x(propsArr[3]) + 2)
+                        .attr("y1", 20)
+                        .attr("x2", x(propsArr[3]) > 100 ? x(propsArr[3]) - 2 : x(propsArr[3]) + 2)
+                        .attr("y2", (height / 2.5) + 35)
+                        .style("stroke-width", 4)
+                        .style("stroke", outlayedAmountColor)
+                        .style("fill", "none");
+                }
                 // current label
                 chartSvg.append("foreignObject")
                     .attr('width', x(propsArr[1]) - 10)
@@ -250,17 +262,19 @@ const HorizontalSingleStackedBarViz = ({
                     .select('strong')
                     .style('font-size', '20px');
                 // obligated label
-                chartSvg.append("foreignObject")
-                    .attr('width', x(propsArr[0]) - x(propsArr[2]) <= 100 ? x(propsArr[2]) - 10 : x(propsArr[0]) - x(propsArr[2]) - 10)
-                    .attr('height', 70)
-                    .attr('x', x(propsArr[0]) - x(propsArr[2]) <= 100 ? 0 : x(propsArr[2]) + 10)
-                    .attr('y', 90)
-                    .html(`<div className="award-amounts-viz-outlays__desc-text"><strong>${obligatedAmountValue}</strong><br />${obligatedAmountLabel}</div>`)
-                    .select('div')
-                    .style('float', x(propsArr[0]) - x(propsArr[2]) <= 100 ? 'right' : 'left')
-                    .style('text-align', x(propsArr[0]) - x(propsArr[2]) <= 100 ? 'right' : 'left')
-                    .select('strong')
-                    .style('font-size', '20px');
+                if (obligatedAmountValue.indexOf("$0") < 0) {
+                    chartSvg.append("foreignObject")
+                        .attr('width', x(propsArr[0]) - x(propsArr[2]) <= 100 ? x(propsArr[2]) - 10 : x(propsArr[0]) - x(propsArr[2]) - 10)
+                        .attr('height', 70)
+                        .attr('x', x(propsArr[0]) - x(propsArr[2]) <= 100 ? 0 : x(propsArr[2]) + 10)
+                        .attr('y', 90)
+                        .html(`<div className="award-amounts-viz-outlays__desc-text"><strong>${obligatedAmountValue}</strong><br />${obligatedAmountLabel}</div>`)
+                        .select('div')
+                        .style('float', x(propsArr[0]) - x(propsArr[2]) <= 100 ? 'right' : 'left')
+                        .style('text-align', x(propsArr[0]) - x(propsArr[2]) <= 100 ? 'right' : 'left')
+                        .select('strong')
+                        .style('font-size', '20px');
+                }
             }
             // outer rect label
             chartSvg.append("foreignObject")
@@ -275,17 +289,19 @@ const HorizontalSingleStackedBarViz = ({
                 .select('strong')
                 .style('font-size', '20px');
             // outlay label
-            chartSvg.append("foreignObject")
-                .attr('width', x(propsArr[0]) - x(propsArr[3]) <= 100 ? x(propsArr[3]) - 10 : x(propsArr[0]) - x(propsArr[3]) - 10)
-                .attr('height', 70)
-                .attr('x', x(propsArr[0]) - x(propsArr[3]) <= 100 ? 0 : x(propsArr[3]) + 10)
-                .attr('y', 20)
-                .html(`<div className="award-amounts-viz-outlays__desc-text"><strong>${outlayedAmountValue}</strong><br />${outlayedAmountLabel}</div>`)
-                .select('div')
-                .style('float', x(propsArr[0]) - x(propsArr[3]) <= 100 ? 'right' : 'left')
-                .style('text-align', x(propsArr[0]) - x(propsArr[3]) <= 100 ? 'right' : 'left')
-                .select('strong')
-                .style('font-size', '20px');
+            if (outlayedAmountValue.indexOf("$0") < 0) {
+                chartSvg.append("foreignObject")
+                    .attr('width', x(propsArr[0]) - x(propsArr[3]) <= 100 ? x(propsArr[3]) - 10 : x(propsArr[0]) - x(propsArr[3]) - 10)
+                    .attr('height', 70)
+                    .attr('x', x(propsArr[0]) - x(propsArr[3]) <= 100 ? 0 : x(propsArr[3]) + 10)
+                    .attr('y', 20)
+                    .html(`<div className="award-amounts-viz-outlays__desc-text"><strong>${outlayedAmountValue}</strong><br />${outlayedAmountLabel}</div>`)
+                    .select('div')
+                    .style('float', x(propsArr[0]) - x(propsArr[3]) <= 100 ? 'right' : 'left')
+                    .style('text-align', x(propsArr[0]) - x(propsArr[3]) <= 100 ? 'right' : 'left')
+                    .select('strong')
+                    .style('font-size', '20px');
+            }
         };
         // for Loans award type only
         const renderBarChartLoans = () => {
@@ -323,7 +339,7 @@ const HorizontalSingleStackedBarViz = ({
                 .attr("y", (height / 2.5) + 10)
                 .attr("width", x(propsArr[2]) < 8 ? 8 + x(propsArr[2]) : x(propsArr[2]))
                 .attr("height", '30')
-                .attr("fill", "#0b2e5a");
+                .attr("fill", outlayedAmountColor);
             // face value line
             chartSvg.append("line")
                 .attr("x1", x(propsArr[0]) - 2)

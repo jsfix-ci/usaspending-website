@@ -51,7 +51,7 @@ const IdvContent = ({
     return (
         <AwardPageWrapper
             awardType="idv"
-            defCodes={getAllNetPositiveIdvFileCDefCodes(overview, details)}
+            allDefCodes={getAllNetPositiveIdvFileCDefCodes(overview, details)}
             title={overview.title}
             lastModifiedDateLong={overview.dates.lastModifiedDateLong}
             glossaryLink={glossaryLink}
@@ -72,7 +72,8 @@ const IdvContent = ({
                 <IdvAwardAmountsSectionContainer
                     jumpToSection={jumpToSection}
                     awardId={awardId}
-                    overview={overview} />
+                    overview={overview}
+                    defCodes={details?.child_file_c} />
                 <AwardDescription
                     awardType={overview.category}
                     awardId={awardId}
