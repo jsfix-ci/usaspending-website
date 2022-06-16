@@ -48,6 +48,21 @@ export const profileOptions = [
     }
 ];
 
+export const dataDivesOptions = [
+    {
+        label: 'Women-Owned Small Business',
+        url: '/data-dives/women-owned-small-business',
+        enabled: true,
+        isNewTab: true
+    },
+    {
+        label: 'Equity in COVID-19 Spending',
+        url: '/data-dives/equity-in-covid-19-spending',
+        enabled: true,
+        isNewTab: true
+    }
+];
+
 export const resourceOptions = [
     {
         label: 'Glossary',

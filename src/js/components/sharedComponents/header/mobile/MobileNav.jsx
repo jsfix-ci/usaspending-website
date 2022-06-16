@@ -9,7 +9,7 @@ import { withRouter, Link } from 'react-router-dom';
 
 import Analytics from 'helpers/analytics/Analytics';
 
-import { searchOptions, profileOptions, downloadOptions, resourceOptions } from 'dataMapping/navigation/menuOptions';
+import { searchOptions, profileOptions, dataDivesOptions, downloadOptions, resourceOptions } from 'dataMapping/navigation/menuOptions';
 
 import MobileTop from './MobileTop';
 import MobileDropdown from './MobileDropdown';
@@ -90,6 +90,14 @@ export class MobileNav extends React.Component {
                                 {...this.props}
                                 label="Profiles"
                                 items={profileOptions}
+                                active={this.state.url} />
+                            <hr className="mobile-nav-content__divider" />
+                        </li>
+                        <li className="mobile-nav-content__list-item">
+                            <MobileDropdown
+                                {...this.props}
+                                label="Data Dives"
+                                items={dataDivesOptions}
                                 active={this.state.url} />
                             <hr className="mobile-nav-content__divider" />
                         </li>

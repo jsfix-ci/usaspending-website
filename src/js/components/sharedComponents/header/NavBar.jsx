@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope } from "@fortawesome/free-regular-svg-icons";
 
 import Analytics from 'helpers/analytics/Analytics';
-import { searchOptions, profileOptions, downloadOptions, resourceOptions } from 'dataMapping/navigation/menuOptions';
+import { searchOptions, profileOptions, dataDivesOptions, downloadOptions, resourceOptions } from 'dataMapping/navigation/menuOptions';
 import EmailSignUp from 'components/homepage/EmailSignUp';
 
 import { QAT } from '../../../GlobalConstants';
@@ -177,6 +177,14 @@ export default class NavBar extends React.Component {
                                     title="Profiles: Learn more about organizations and accounts"
                                     label="Profiles"
                                     items={profileOptions} />
+                            </li>
+                            <li
+                                className="full-menu__item"
+                                role="menuitem">
+                                <Dropdown
+                                    title="Data Dives: Dive into the world of goverment spending by exploring data examples on various topics of interest"
+                                    label="Data Dives"
+                                    items={dataDivesOptions} />
                             </li>
                             <li
                                 className="full-menu__item"
