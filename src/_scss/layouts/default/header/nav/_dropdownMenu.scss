@@ -9,10 +9,14 @@
         @include align-items(center);
         @include justify-content(center);
         position: relative;
-        padding: rem(18) rem(20);
+        padding: rem(18) rem(12);
 
         &:hover, &:active, &.nav-dropdown__parent_active {
             box-shadow: 0 2px 6px 0 rgba(78,78,78,0.5);
+        }
+        
+        @include media($large-screen) {
+            padding: rem(18) rem(20);
         }
     }
     .nav-dropdown__parent-label {
