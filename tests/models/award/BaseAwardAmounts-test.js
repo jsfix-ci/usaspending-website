@@ -27,7 +27,7 @@ mockIdv.populate(mockApiData.mockIdv);
 const mockLoan = Object.create(BaseFinancialAssistance);
 mockLoan.populate(mockApiData.mockLoan);
 
-const mockDefc = ['L', 'M', 'N', 'O', 'P', 'R'];
+const mockDefc = [{code: 'L', disaster: 'covid_19'}, {code: 'M', disaster: 'covid_19'}, {code: 'N', disaster: 'covid_19'}, {code: 'O', disaster: 'covid_19'}, {code: 'P', disaster: 'covid_19'}, {code: 'R', disaster: 'covid_19'}];
 const awardAmounts = Object.create(BaseAwardAmounts);
 awardAmounts.populate(mockAwardAmounts, "idv_aggregated", mockDefc);
 
@@ -121,22 +121,25 @@ describe('BaseAwardAmounts', () => {
             expect(awardAmounts.baseExercisedOptionsFormatted).toEqual('$10,000,000.00');
         });
         it('should format the combined current award amounts amounts with units', () => {
-            expect(awardAmounts.baseExercisedOptionsAbbreviated).toEqual('$10.0 M');
+            expect(awardAmounts.baseExercisedOptionsAbbreviated).toEqual('$10.0 Million');
         });
         it('should format the obligated amount', () => {
             expect(awardAmounts.totalObligationFormatted).toEqual('$1,623,321.02');
         });
+        it('should format the combined outlay amount', () => {
+            expect(awardAmounts.combinedOutlayFormatted).toEqual('$2,222,222.22');
+        });
         it('should format the totalObligation options with units', () => {
-            expect(awardAmounts.totalObligationAbbreviated).toEqual('$1.6 M');
+            expect(awardAmounts.totalObligationAbbreviated).toEqual('$1.6 Million');
         });
         it('should format negative obligations', () => {
-            expect(awardAmountsNeg.totalObligationAbbreviated).toEqual('($1.6 M)');
+            expect(awardAmountsNeg.totalObligationAbbreviated).toEqual('($1.6 Million)');
         });
         it('should format the combined potential award amounts amounts', () => {
             expect(awardAmounts.baseAndAllOptionsFormatted).toEqual('$106,987,321.10');
         });
         it('should format the combined potential award amounts amounts with units', () => {
-            expect(awardAmounts.baseAndAllOptionsAbbreviated).toEqual('$107.0 M');
+            expect(awardAmounts.baseAndAllOptionsAbbreviated).toEqual('$107.0 Million');
         });
         it('should format the amount by which obligations exceed the current amounts', () => {
             expect(awardAmountsOverspent.overspendingFormatted).toEqual('$2,500,000.00');
@@ -165,6 +168,7 @@ describe('BaseAwardAmounts', () => {
         it('should successfully return spending data for the IDV itself (non-combined)', () => {
             expect(nonAggregateIdvNormal.baseExercisedOptionsFormatted).toEqual('$0.00');
             expect(nonAggregateIdvNormal.totalObligationFormatted).toEqual('$0.00');
+            expect(nonAggregateIdvNormal.totalOutlayFormatted).toEqual('$0.00');
             expect(nonAggregateIdvNormal.baseAndAllOptionsFormatted).toEqual('$0.00');
             expect(nonAggregateIdvNormal.overspendingFormatted).toEqual('$0.00');
             expect(nonAggregateIdvNormal.extremeOverspendingFormatted).toEqual('$0.00');
@@ -172,6 +176,7 @@ describe('BaseAwardAmounts', () => {
         it('should handle overspending', () => {
             expect(nonAggregateIdvOverspent.baseExercisedOptionsFormatted).toEqual('$10.00');
             expect(nonAggregateIdvOverspent.totalObligationFormatted).toEqual('$0.00');
+            expect(nonAggregateIdvNormal.totalOutlayFormatted).toEqual('$0.00');
             expect(nonAggregateIdvOverspent.baseAndAllOptionsFormatted).toEqual('$0.00');
             expect(nonAggregateIdvOverspent.overspendingFormatted).toEqual('-$10.00');
             expect(nonAggregateIdvOverspent.extremeOverspendingFormatted).toEqual('$0.00');
@@ -179,6 +184,7 @@ describe('BaseAwardAmounts', () => {
         it('should handle extremeOverspending', () => {
             expect(nonAggregateIdvExtremeOverspent.baseExercisedOptionsFormatted).toEqual('$0.00');
             expect(nonAggregateIdvExtremeOverspent.totalObligationFormatted).toEqual('$0.00');
+            expect(nonAggregateIdvNormal.totalOutlayFormatted).toEqual('$0.00');
             expect(nonAggregateIdvExtremeOverspent.baseAndAllOptionsFormatted).toEqual('$10.00');
             expect(nonAggregateIdvExtremeOverspent.overspendingFormatted).toEqual('$0.00');
             expect(nonAggregateIdvExtremeOverspent.extremeOverspendingFormatted).toEqual('-$10.00');
@@ -200,6 +206,8 @@ describe('BaseAwardAmounts', () => {
             expect(arrayOfObjectProperties.includes("childIDVCount")).toEqual(false);
             expect(arrayOfObjectProperties.includes("childAwardCount")).toEqual(false);
             expect(arrayOfObjectProperties.includes("grandchildAwardCount")).toEqual(false);
+            expect(arrayOfObjectProperties.includes("childAwardTotalOutlay")).toEqual(false);
+            expect(arrayOfObjectProperties.includes("grandchildAwardTotalOutlay")).toEqual(false);
         });
     });
     describe('Grant Award Amounts', () => {
@@ -211,14 +219,16 @@ describe('BaseAwardAmounts', () => {
             expect(arrayOfObjectProperties.includes("childIDVCount")).toEqual(false);
             expect(arrayOfObjectProperties.includes("childAwardCount")).toEqual(false);
             expect(arrayOfObjectProperties.includes("grandchildAwardCount")).toEqual(false);
+            expect(arrayOfObjectProperties.includes("childAwardTotalOutlay")).toEqual(false);
+            expect(arrayOfObjectProperties.includes("grandchildAwardTotalOutlay")).toEqual(false);
         });
         it('creates grant specific properties w/ correct formatting', () => {
             expect(grantAwardAmounts._nonFederalFunding).toEqual(1130000);
             expect(grantAwardAmounts.nonFederalFundingFormatted).toEqual("$1,130,000.00");
-            expect(grantAwardAmounts.nonFederalFundingAbbreviated).toEqual("$1.1 M");
+            expect(grantAwardAmounts.nonFederalFundingAbbreviated).toEqual("$1.1 Million");
             expect(grantAwardAmounts._totalFunding).toEqual(1130000000);
             expect(grantAwardAmounts.totalFundingFormatted).toEqual("$1,130,000,000.00");
-            expect(grantAwardAmounts.totalFundingAbbreviated).toEqual("$1.1 B");
+            expect(grantAwardAmounts.totalFundingAbbreviated).toEqual("$1.1 Billion");
         });
     });
     describe('Loan Award Amounts', () => {
@@ -227,10 +237,10 @@ describe('BaseAwardAmounts', () => {
         it('creates loan specific properties w/ correct formatting', () => {
             expect(loanAwardAmounts._subsidy).toEqual(1290000.00);
             expect(loanAwardAmounts.subsidyFormatted).toEqual("$1,290,000.00");
-            expect(loanAwardAmounts.subsidyAbbreviated).toEqual("$1.3 M");
+            expect(loanAwardAmounts.subsidyAbbreviated).toEqual("$1.3 Million");
             expect(loanAwardAmounts._faceValue).toEqual(2497000000.00);
             expect(loanAwardAmounts.faceValueFormatted).toEqual("$2,497,000,000.00");
-            expect(loanAwardAmounts.faceValueAbbreviated).toEqual("$2.5 B");
+            expect(loanAwardAmounts.faceValueAbbreviated).toEqual("$2.5 Billion");
         });
     });
     describe('fileC getters', () => {

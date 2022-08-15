@@ -1,0 +1,167 @@
+.status-of-funds__visualization {
+    .status-of-funds__controls {
+        margin-bottom: 16px;
+        @media(min-width: $large-screen) { 
+            display: flex;
+        }
+        margin-right: -16px;
+        @media(min-width: $medium-screen) {
+            justify-content: end;
+        }
+
+        .status-of-funds__line-div {
+            @media(min-width: $large-screen) { 
+                border-right: 1px solid $color-gray-lighter;
+                line-height: 24px;
+                height: 24px;
+                margin-left: 8px;
+            }
+        }
+
+        .status-of-funds__accordion {
+            &:hover, &:active, &:focus, &:visited {
+                color: $color-gray-medium;
+            }
+        }
+    }
+
+    .status-of-funds__what-content {
+        border-left: 4px solid $color-primary-alt-light;
+        border-top: 1px solid $color-primary-alt-light;
+        border-right: 1px solid $color-primary-alt-light;
+        border-bottom: 1px solid $color-primary-alt-light;
+        background-color: #e0f3f8;
+        padding: 24px 16px;   
+        margin-left: 24px;
+        margin-right: 8px;
+        margin-bottom: 16px;
+        @media(max-width: $tablet-screen) { 
+            margin-left: 0;
+            margin-right: 0;
+        }
+        @media(min-width: $tablet-screen) and (max-width:$medium-screen) { 
+            margin-left: 0;
+            margin-right: 0;
+            margin-top: 32px;
+        }
+
+        .status-of-funds__info-icon {
+            height: 20px;
+            width: 20px;
+            color: #00bfe7;
+        }
+
+        .usda-glossary-link{
+            color: $color-gray-light;
+            &:hover, &:active, &:focus, &:visited {
+                color: $color-gray-medium;
+            }
+        }    
+
+        .status-of-funds__emphasis {
+            white-space: nowrap;
+            font-weight: $font-semibold;
+        }
+
+        .status-of-funds__what-heading {
+            font-size: rem(16);
+            font-weight: $font-semibold;
+            display: inline-block;
+            margin: 0;
+            margin-left: 18px;
+            color: $color-grayblack;
+        }
+
+        .status-of-funds__what-second-heading {
+            font-size: rem(16);
+            font-weight: $font-semibold;
+            display: inline-block;
+            color: $color-grayblack;
+            margin: 24px 16px 0 40px;
+        }
+
+        .status-of-funds__what-text {
+            margin-left: 40px;
+            font-size: rem(14);
+            color: $color-base;
+            margin-bottom: 0;
+            margin-right: 16px;
+            margin-top: 8px;
+        }
+    }
+
+    .usa-dt-pagination__totals {
+        @media(min-width: $large-screen) {
+            margin-left: rem(32);
+        }
+    }
+    .drilldown-back-button {
+        @media(max-width: $medium-screen) {
+            margin-top: 3rem;
+        }
+        @media(min-width: $large-screen) {
+            margin-left: rem(32);
+        }
+        margin-bottom: 2rem;
+        font-size: rem(16);
+        padding: 0;
+        border: none;
+        background: none;
+        color: $color-primary;
+    }
+    .status-of-funds__visualization-chart {
+        @media(min-width: $large-screen) {
+            margin-left: rem(20);
+        }
+        svg {
+            height: 100% !important;
+            width: 100% !important;
+        }
+        .parent-g { visibility: hidden; rect#hlines { fill-opacity: 0; }}
+        .parent-g > * { visibility: visible; rect#hlines { fill-opacity: 0; }}
+        .parent-g > * { transition: opacity 150ms ease-in-out 100ms; }
+        .parent-g:hover > * { opacity: 0.4; }
+        .parent-g > *:hover { cursor: pointer; opacity: 1; transition-delay: 0ms, 0ms; rect#hlines { filter: drop-shadow(0px 8px 16px rgba(0, 0, 0, 0.1)); fill-opacity: 1; stroke: 1px }}
+
+        text.y-axis-labels {
+            font-size: rem(20);
+            @media(max-width: 1499px) {
+                font-size: rem(23);
+            }
+            @media(max-width: 1199px) {
+                font-size: rem(30);
+            }
+            @media(max-width: $medium-screen) {
+                font-size: rem(28);
+            }
+            @media(max-width: 599px) {
+                font-size: rem(40);
+            }
+            @media(max-width: 350px) {
+                font-size: rem(44);
+            }
+        }
+    }
+    h6 {
+        font-size: rem(20);
+        font-weight: $font-normal;
+        color: $color-grayblack;
+        @media(min-width: $medium-screen) {
+            margin-top: 0;
+        }
+        @media(min-width: $large-screen) {
+            margin-left: rem(32);
+        }
+    }
+    .tickLines-vertical {
+        line {
+            stroke: $color-gray-lightest;
+        }
+        .tick:first-of-type {
+            line {
+                stroke: none;
+                fill: none;
+            }
+        }
+    }
+}

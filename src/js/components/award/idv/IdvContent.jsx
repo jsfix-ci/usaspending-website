@@ -26,14 +26,16 @@ const propTypes = {
     awardId: PropTypes.string,
     details: AWARD_COUNTS_PROPS,
     overview: AWARD_OVERVIEW_PROPS,
-    jumpToSection: PropTypes.func
+    jumpToSection: PropTypes.func,
+    unlinked: PropTypes.bool
 };
 
 const IdvContent = ({
     awardId,
     details,
     overview,
-    jumpToSection
+    jumpToSection,
+    unlinked
 }) => {
     const [awardHistoryActiveTab, setAwardHistoryTab] = useState('transaction');
     const [relatedAwardsActiveTab, setRelatedAwardsTab] = useState('child_awards');
@@ -51,13 +53,14 @@ const IdvContent = ({
     return (
         <AwardPageWrapper
             awardType="idv"
-            defCodes={getAllNetPositiveIdvFileCDefCodes(overview, details)}
+            allDefCodes={getAllNetPositiveIdvFileCDefCodes(overview, details)}
             title={overview.title}
             lastModifiedDateLong={overview.dates.lastModifiedDateLong}
             glossaryLink={glossaryLink}
             overviewType={overview.type}
             identifier={overview.piid}
-            dates={overview.dates}>
+            dates={overview.dates}
+            unlinked={unlinked}>
             <AwardSection type="row" className="award-overview" id="award-overview">
                 <AwardOverviewLeftSection
                     awardingAgency={overview.awardingAgency}
@@ -72,7 +75,8 @@ const IdvContent = ({
                 <IdvAwardAmountsSectionContainer
                     jumpToSection={jumpToSection}
                     awardId={awardId}
-                    overview={overview} />
+                    overview={overview}
+                    defCodes={details?.child_file_c} />
                 <AwardDescription
                     awardType={overview.category}
                     awardId={awardId}
@@ -84,7 +88,8 @@ const IdvContent = ({
                 <IdvActivityContainer />
                 <FederalAccountsSection
                     awardType={overview.category}
-                    jumpToFederalAccountsHistory={jumpToFederalAccountsHistory} />
+                    jumpToFederalAccountsHistory={jumpToFederalAccountsHistory}
+                    unlinked={unlinked} />
             </AwardSection>
             <ReferencedAwardsContainer
                 tableType={relatedAwardsActiveTab}

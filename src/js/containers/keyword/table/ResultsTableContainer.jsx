@@ -11,7 +11,7 @@ import * as KeywordHelper from 'helpers/keywordHelper';
 import { availableColumns, defaultSort } from 'dataMapping/keyword/resultsTableColumns';
 import { awardTypeGroups } from 'dataMapping/search/awardType';
 import { measureTableHeader } from 'helpers/textMeasurement';
-import tableTabsTooltips from 'dataMapping/shared/tableTabsTooltips';
+import TableTabsTooltips from 'dataMapping/shared/TableTabsTooltips';
 import Analytics from 'helpers/analytics/Analytics';
 
 import ResultsTableSection from 'components/keyword/table/ResultsTableSection';
@@ -41,7 +41,7 @@ const tableTypes = [
     {
         label: 'Loans',
         internal: 'loans',
-        tooltip: tableTabsTooltips('loans')
+        tooltip: TableTabsTooltips('loans')
     },
     {
         label: 'Other',
@@ -78,7 +78,7 @@ export default class ResultsTableContainer extends React.Component {
     }
 
     componentDidMount() {
-        // Perform a search for a keyword derived from the url
+    // Perform a search for a keyword derived from the url
         if (this.props.keyword) {
             this.loadColumns();
             this.pickDefaultTab();
@@ -94,7 +94,7 @@ export default class ResultsTableContainer extends React.Component {
     }
 
     pickDefaultTab() {
-        // get the transaction counts for the current filters
+    // get the transaction counts for the current filters
         if (this.tabCountRequest) {
             this.tabCountRequest.cancel();
         }
@@ -267,7 +267,7 @@ export default class ResultsTableContainer extends React.Component {
     }
 
     loadNextPage() {
-        // check if request is already in-flight
+    // check if request is already in-flight
         if (this.state.inFlight) {
             // in-flight, ignore this request
             return;

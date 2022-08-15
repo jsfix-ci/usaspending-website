@@ -4,6 +4,7 @@
  */
 
 import { isAwardAggregate, getSubmittingAgencyId } from 'helpers/awardSummaryHelper';
+import { idList } from '../shared/recipientIdentifiers';
 
 const getUriOrFain = ({
     generatedId,
@@ -30,6 +31,7 @@ const additionalDetailsFinancialAssistance = (awardData) => {
         placeOfPerformance,
         recipient
     } = awardData;
+
     const data = {
         uniqueAwardKey: {
             'Unique Award Key': awardData.generatedId,
@@ -43,7 +45,7 @@ const additionalDetailsFinancialAssistance = (awardData) => {
             'Awarding Agency': {
                 type: 'link',
                 data: {
-                    path: (awardingAgency.id && awardingAgency.hasAgencyPage) ? `/agency/${awardingAgency.id}` : null,
+                    path: (awardingAgency.agencySlug && awardingAgency.hasAgencyPage) ? `/agency/${awardingAgency.agencySlug}` : null,
                     title: awardingAgency.formattedToptier
                 }
             },
@@ -64,7 +66,7 @@ const additionalDetailsFinancialAssistance = (awardData) => {
             'Funding Agency': {
                 type: 'link',
                 data: {
-                    path: (fundingAgency.id && fundingAgency.hasAgencyPage) ? `/agency/${fundingAgency.id}` : null,
+                    path: (fundingAgency.agencySlug && fundingAgency.hasAgencyPage) ? `/agency/${fundingAgency.agencySlug}` : null,
                     title: fundingAgency.formattedToptier
                 }
             },
@@ -105,16 +107,21 @@ const additionalDetailsFinancialAssistance = (awardData) => {
                     title: recipient._name
                 }
             },
-            DUNS: recipient.duns || '',
+            'Recipient Identifier': {
+                type: 'list',
+                data: idList(recipient.duns, recipient.uei)
+            },
             'Parent Recipient': {
                 type: 'link',
                 data: {
-                    path: recipient.parentInternalId ?
-                        `/recipient/${recipient.parentInternalId}/latest` : null,
+                    path: recipient.parentInternalId ? `/recipient/${recipient.parentInternalId}/latest` : null,
                     title: recipient.parentName
                 }
             },
-            'Parent DUNS': recipient.parentDuns || '',
+            'Parent Recipient Identifier': {
+                type: 'list',
+                data: idList(recipient.parentDuns, recipient.parentUei)
+            },
             'Recipient Address': {
                 type: 'address',
                 data: [

@@ -1,9 +1,9 @@
 /**
- * ObligationsByAwardTypeHelper.js
+ * ObligationsByAwardTypeHelper-test.js
  * Created by Andrea Blackwell 12/15/2021
  */
 
-import { mapToFullCategoryName, getCategoryNameByAwardType, getActiveCategoryType, getOuterCategoryId } from 'helpers/agencyV2/visualizations/ObligationsByAwardTypeHelper';
+import { mapToFullCategoryName, getCategoryNameByAwardType, getActiveCategoryType, getOuterCategoryId } from 'helpers/agency/visualizations/ObligationsByAwardTypeHelper';
 
 const mockCategories = [
     {

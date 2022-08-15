@@ -1,0 +1,242 @@
+.usa-da-agency-page-v2 {
+    @import 'all';
+	@import 'layouts/default/default';
+	@import 'components/pageLoading';
+	@import 'layouts/default/stickyHeader/header';
+    @import 'mixins/profilePage';
+
+	@include display(flex);
+	@include justify-content(flex-start);
+	@include align-items(center);
+	@include flex-direction(column);
+	min-height: 100vh;
+	width: 100%;
+
+	.site-header,
+	.usda-page__container,
+	.main-content,
+	.footer-container {
+		width: 100%;
+		.usda-page-header__toolbar {
+			.usda-download-btn .usda-button {
+				padding: 0;
+				margin: 0;
+			}
+			.usda-download-btn span,
+			.usda-share-icon span {
+				margin-top: rem(5);
+			}
+		}
+	}
+
+    section.accordion {
+        @media(min-width: $tablet-screen) { 
+            margin-left: -10px;        
+        }
+       
+    }
+
+    section.open.accordion--open.accordion {
+        margin-bottom: 0;
+        @media(min-width: $tablet-screen) and (max-width:1199px) { 
+            margin-left: -10px;
+            margin-bottom: 0px;
+        }
+
+        @media(width: 1200px) { 
+            margin-left: -10px;
+            margin-bottom: 0px;
+        }
+
+        @media(width: 1201px) { 
+            margin-left: -10px;
+            margin-bottom: 0px;
+        }
+    }
+
+    .accordion-container .heading {
+        height: 14px;
+        color: $color-primary;
+        border: none;
+        font-size:rem(14);
+        padding-left: 8px;
+        padding-right: 0;
+        margin-top: -2px;
+        margin-left: 0;
+
+        @media (min-width: 1200px) {
+            float: right;
+            padding-left: 16px;
+        }
+        @media (min-width: 1000px) and (max-width: 1200px) {
+            padding-left: 8px;
+            float: none;
+            width: 24%;
+            margin-top: 0px;
+        }
+        @media (width: 1200px) {
+            float: right;
+            padding-left: 16px;
+            width: 100%;
+            margin-top: -2px;
+        }
+        @media (width: 1199px) {
+            padding-left: 8px;
+            float: none;
+            width: 24%;
+            margin-top: 0px;
+        }
+        @media (min-width: 900px) and (max-width: 1000px) {
+            padding-left: 8px;
+            width: 24%;
+            float: left;
+        }
+        @media (min-width: 767px) and (max-width: 900px) {
+            float:none;
+            width:19%;
+            padding-left: 8px;
+        }
+        @media (min-width: 700px) and (max-width: 767px) {
+            float:none;
+            width:19%;
+            padding-left: 0px;
+        }
+        @media (min-width: 550px) and (max-width: 700px) {
+            float:none;
+            padding-left: 0px;
+            width:23%;
+        }
+        @media (min-width: 400px) and (max-width: 550px) {
+            float:none;
+            width:33%;
+            margin-left: -8px;
+        }
+        @media (min-width: 320px) and (max-width: 400px) {
+            float:none;
+            width:36.9%;
+            margin-left: -8px;
+        }
+
+        &:hover, &:active, &:focus, &:visited {
+            color: $color-primary-darker;
+        }
+    }
+
+    .accordion-container .plus {
+        @media(min-width: $large-screen) {
+            margin-right: 4px;
+            margin-left: 4px;
+        }
+
+        &:hover, &:active, &:focus, &:visited {
+            color: $color-primary-darker;
+        }
+        width: 10px;
+        height: 10px;
+    }
+
+    .accordion-container .minus {
+        @media(min-width: $large-screen) {
+            margin-left: 4px;
+            margin-right: 4px;
+        }
+        width: 10px;
+        height: 10px;
+
+        &:hover, &:active, &:focus, &:visited {
+            color: $color-primary-darker;
+        }
+    }
+
+    .accordion-container .toggle {
+        @media(max-width: $tablet-screen) {
+            margin-right: 32px;
+            margin-left: 4px;
+            padding: 0;
+        }
+        color: $color-primary;
+        &:hover, &:active, &:focus, &:visited {
+            color: $color-primary-darker;
+        }
+        padding-left: 0;
+        font-size: rem(14);
+        font-weight: $font-semibold;
+        margin-right: 4px;
+    }
+
+    .accordion-container .open .content {
+        display:none;
+    }
+
+    .usda-page-header__toolbar .usa-dt-picker .usa-dt-picker__dropdown-container .usa-dt-picker__list .usa-dt-picker__item { 
+        padding-left: 25px;
+    }
+
+    .usda-page-header__toolbar .usda-fy-picker__container .usa-dt-picker .usa-dt-picker__dropdown-container .usa-dt-picker__list {
+        width: 86%
+    }
+
+	.usda__flex-row {
+		@include display(flex);
+		@include flex-wrap(wrap);
+		width: 100%;
+		.usda__flex-col {
+			@include flex(1 1 auto);
+			.body__content {
+				width: 100%; // Fixes an IE Flexbox bug
+			}
+		}
+	}
+
+    .main-content {
+        @include display(flex);
+        width: 100%;
+        @include flex-grow(1);
+        @include flex-wrap(wrap);
+        max-width: rem(1600);
+        margin: auto;
+        ul {
+            padding: 0;
+            li {
+                list-style: none;
+            }
+        }
+        @import './sidebar';
+        .body {
+            @include display(flex);
+            width: 100%;
+            @include flex-direction(column);
+            padding: 2.5% 2.5% 0 2.5%;
+            margin: rem(20) rem(20) rem(20) 0;
+            background: $color-white;
+            @media(min-width: $tablet-screen) {
+                width: 70%;
+            }
+            @import './overview/pageTitle';
+            .usda-message {
+                &.usda-message_error {
+                    background-color: $color-white;
+                }
+            }
+            .body__content {
+                margin-top: rem(32);
+                .table-wrapper {
+                    overflow-x: auto;
+                }
+            }
+            .usda-section__container {
+                @include display(flex);
+                @import './overview/overview';
+                hr {
+                    height: rem(2)
+                }
+            }
+            @import './statusOfFunds/statusOfFunds';
+            @import './statusOfFunds/introSection';
+            @import 'components/Note';
+            .default-note {
+                @include profile-page-wrap;
+            }
+        }
+    }
+}

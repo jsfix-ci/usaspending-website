@@ -25,7 +25,7 @@ import PSCCheckboxTreeContainer from 'containers/search/filters/psc/PSCCheckboxT
 import PricingTypeContainer from 'containers/search/filters/PricingTypeContainer';
 import SetAsideContainer from 'containers/search/filters/SetAsideContainer';
 import ExtentCompetedContainer from 'containers/search/filters/ExtentCompetedContainer';
-import DEFCheckboxTree, { NewBadge } from 'containers/search/filters/def/DEFCheckboxTree';
+import DEFCheckboxTree from 'containers/search/filters/def/DEFCheckboxTree';
 
 import {
     KeyWordTooltip,
@@ -125,7 +125,7 @@ const staticFilters = {
         null,
         null,
         null,
-        NewBadge,
+        null,
         null,
         null,
         null,
@@ -174,7 +174,7 @@ const SearchSidebar = ({
         }), {});
     const expanded = [];
     releasedFilters.options.forEach((filter) => {
-        // Collapse all by default, unless the filter has a selection made
+    // Collapse all by default, unless the filter has a selection made
         if (filter.title === 'Time Period') {
             // time period is always expanded
             expanded.push(true);

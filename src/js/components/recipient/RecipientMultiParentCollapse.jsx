@@ -57,13 +57,13 @@ export default class RecipientMultiParentCollapse extends React.Component {
             <div className="recipient-overview__parent">
                 {
                     isSingleParent ?
-                        // Render only top level parent if there's only 1 parent
+                    // Render only top level parent if there's only 1 parent
                         <div className="recipient-overview__parent">
                             This recipient is a child of &nbsp;
                             <Link
                                 className="recipient-overview__parent-link"
                                 to={`/recipient/${initialParent.parent_id}/latest`}>
-                                {initialParent.parent_name} {initialDuns}
+                                {initialParent.parent_name}
                             </Link>
                         </div>
                         :
@@ -105,7 +105,7 @@ export default class RecipientMultiParentCollapse extends React.Component {
                                 key={initialDuns}
                                 className="recipient-overview__multiparents"
                                 to={`/recipient/${initialParent.parent_id}/latest`}>
-                                {initialParent.parent_name} {initialDuns}
+                                {initialParent.parent_name}
                             </Link>
                             <div className={this.state.open ? '' : 'hide'}>
                                 {this.renderMultipleParents()}

@@ -20,7 +20,8 @@ import BulkDownloadBottomBarContainer from
     'containers/bulkDownload/modal/BulkDownloadBottomBarContainer';
 import FloatingGlossaryButton from 'components/sharedComponents/FloatingGlossaryButton';
 import FooterExternalLink from 'components/sharedComponents/FooterExternalLink';
-import Subscribe from 'components/sharedComponents/Subscribe';
+import Subscribe from '../components/sharedComponents/Subscribe';
+import Training from '../components/sharedComponents/Training';
 
 const propTypes = {
     pageName: PropTypes.string.isRequired,
@@ -52,6 +53,7 @@ const Footer = ({
                 filters={filters} />
             <BulkDownloadBottomBarContainer />
             <Subscribe pageName={pageName} />
+            <Training pageName={pageName} />
             <footer
                 className="footer-outer-wrap"
                 role="contentinfo"
@@ -95,12 +97,12 @@ const Footer = ({
                             <ul className="links">
                                 <li>
                                     <FooterExternalLink
-                                        link="https://usaspending-help.zendesk.com/hc/en-us/sections/115000739433-Frequently-Ask-Questions-"
+                                        link="https://fiscalservice.force.com/usaspending/s/recordlist/Knowledge__kav/00B3d000000V4WDEA0"
                                         title="FAQs" />
                                 </li>
                                 <li>
                                     <FooterExternalLink
-                                        link="https://usaspending-help.zendesk.com/hc/en-us/community/topics"
+                                        link="https://fiscalservice.force.com/usaspending/s/"
                                         title="Community" />
                                 </li>
                                 <li>

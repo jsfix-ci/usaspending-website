@@ -2,10 +2,11 @@ import fs from 'fs';
 import path from 'path';
 import { stateNameByFipsId } from '../src/js/dataMapping/state/stateNames';
 import { URLifyStateName } from '../src/js/helpers/stateHelper';
-import agencyIdsToSlugs from '../src/js/dataMapping/agencyV2/agencyIdsToSlugs';
+import agencyIdsToSlugs from '../src/js/dataMapping/agency/agencyIdsToSlugs';
 
 const legacyRedirects = {
     "^/Pages/Default.aspx/": "/",
+    "^/index.html": "/",
     "^/Pages/AdvancedSearch.aspx/": "/search",
     "^/DownloadCenter/Pages/DataDownload.aspx/": "/download_center/custom_award_data",
     "^/DownloadCenter/Pages/dataarchives.aspx/": "/download_center/award_data_archive",

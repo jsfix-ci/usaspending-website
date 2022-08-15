@@ -5,6 +5,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import GlobalConstants from 'GlobalConstants';
 
 import StateLandingTableSorter from 'components/stateLanding/table/StateLandingTableSorter';
 import RecipientLinkCell from './RecipientLinkCell';
@@ -32,6 +33,12 @@ const RecipientLandingTable = (props) => {
                 type={row.recipientLevel}
                 name={row.name}
                 searchString={props.searchString} />
+            <td className="recipient-list__body-cell recipient-list__body-cell_left">
+                {row.uei}
+            </td>
+            <td className="recipient-list__body-cell recipient-list__body-cell_left">
+                {row.duns}
+            </td>
             <td className="recipient-list__body-cell recipient-list__body-cell_center">
                 {row.amount}
             </td>
@@ -40,7 +47,7 @@ const RecipientLandingTable = (props) => {
 
     let message = null;
     if (!props.inFlight && !props.error && props.results.length === 0) {
-        // no results
+    // no results
         if (props.searchString) {
             message = (
                 <div className="recipient-list__message">
@@ -73,6 +80,34 @@ const RecipientLandingTable = (props) => {
                                 <StateLandingTableSorter
                                     field="name"
                                     label="recipient"
+                                    active={{ field: props.order.field, direction: props.order.direction }}
+                                    setSort={props.setSort} />
+                            </div>
+                        </th>
+                        <th className="recipient-list__head-cell">
+                            <div className="header-cell ">
+                                <div className="header-cell__text">
+                                    <div className="header-cell__title header-cell__title_cap">
+                                        UEI
+                                    </div>
+                                </div>
+                                <StateLandingTableSorter
+                                    field="uei"
+                                    label="uei"
+                                    active={{ field: props.order.field, direction: props.order.direction }}
+                                    setSort={props.setSort} />
+                            </div>
+                        </th>
+                        <th className="recipient-list__head-cell">
+                            <div className="header-cell ">
+                                <div className="header-cell__text">
+                                    <div className="header-cell__title">
+                                        {GlobalConstants.DUNS_LABEL}<span className="header-cell__title_cap">DUNS</span>
+                                    </div>
+                                </div>
+                                <StateLandingTableSorter
+                                    field="duns"
+                                    label="duns"
                                     active={{ field: props.order.field, direction: props.order.direction }}
                                     setSort={props.setSort} />
                             </div>

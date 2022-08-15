@@ -19,6 +19,14 @@
             @include media($tablet-screen) {
                 display: block;
             }
+            font-size: rem(28);
+
+            .fa-chevron-right {
+                color: $color-base;
+            }
+            .fa-chevron-left {
+                color: $color-base;
+            }
 
             svg {
                 fill: $color-gray;
@@ -101,7 +109,8 @@
                 }
 
                 &:hover, &:active, &.feature-carousel-pager__dot-button_active {
-                    opacity: 1;
+                    opacity: 0.99
+                ;
                 }
             }
         }

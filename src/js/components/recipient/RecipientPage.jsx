@@ -19,6 +19,7 @@ import PageWrapper from 'components/sharedComponents/PageWrapper';
 import Error from 'components/sharedComponents/Error';
 
 import RecipientContent from './RecipientContent';
+import RecipientInfoBanner from "./RecipientInfoBanner";
 
 const propTypes = {
     loading: PropTypes.bool,
@@ -68,6 +69,12 @@ export const RecipientPage = ({
             message="The recipient ID provided is invalid. Please check the ID and try again." />);
     }
 
+    const backgroundColor = {
+        backgroundColor: "#555",
+        ' @media(max-width: $medium-screen)': {
+            backgroundColor: "#f1f1f1"
+        }
+    };
 
     return (
         <PageWrapper
@@ -78,6 +85,7 @@ export const RecipientPage = ({
             metaTagProps={recipient.overview.id && !loading ? recipientPageMetaTags(recipient.overview) : {}}
             toolBarComponents={[
                 <FiscalYearPicker
+                    backgroundColor={backgroundColor}
                     selectedFy={recipient?.fy}
                     handleFyChange={pickedFy}
                     options={getFiscalYearsWithLatestAndAll(earliestFiscalYear, currentFiscalYear())} />,
@@ -85,19 +93,24 @@ export const RecipientPage = ({
                     onShareOptionClick={handleShare}
                     url={getBaseUrl(slug)} />
             ]}>
-            <main id="main-content" className="main-content">
-                <LoadingWrapper isLoading={loading}>
-                    {content}
-                    <ChildRecipientModalContainer
-                        mounted={isChildModalVisible}
-                        hideModal={hideChildRecipientModal}
-                        recipient={recipient} />
-                    <AlternateNamesRecipientModalContainer
-                        mounted={isAlternateModalVisible}
-                        hideModal={hideAlternateModal}
-                        recipient={recipient} />
-                </LoadingWrapper>
-            </main>
+            <>
+                <div className="info-banner-container">
+                    <RecipientInfoBanner />
+                </div>
+                <main id="main-content" className="main-content">
+                    <LoadingWrapper isLoading={loading}>
+                        {content}
+                        <ChildRecipientModalContainer
+                            mounted={isChildModalVisible}
+                            hideModal={hideChildRecipientModal}
+                            recipient={recipient} />
+                        <AlternateNamesRecipientModalContainer
+                            mounted={isAlternateModalVisible}
+                            hideModal={hideAlternateModal}
+                            recipient={recipient} />
+                    </LoadingWrapper>
+                </main>
+            </>
         </PageWrapper>
     );
 };

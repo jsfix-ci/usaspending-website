@@ -1,7 +1,8 @@
 const merge = require('webpack-merge');
 const webpack = require('webpack');
-const OptimizeCssAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+// const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 const TerserPlugin = require('terser-webpack-plugin');
 
 const common = require('./webpack.common');
@@ -18,11 +19,8 @@ module.exports = merge(common, {
     },
     optimization: {
         minimizer: [
-            new TerserPlugin({
-                cache: true,
-                parallel: true
-            }),
-            new OptimizeCssAssetsPlugin({})
+            new TerserPlugin(),
+            new CssMinimizerPlugin(),
         ],
         runtimeChunk: "single",
         splitChunks: {
@@ -49,7 +47,9 @@ module.exports = merge(common, {
                         loader: "sass-loader",
                         options: {
                             sourceMap: false,
-                            includePaths: ["./src/_scss", "./node_modules"]
+                            sassOptions: {
+                                includePaths: ["./src/_scss", "./node_modules"]
+                            }
                         }
                     }
                 ]
@@ -63,6 +63,7 @@ module.exports = merge(common, {
         new webpack.optimize.MinChunkSizePlugin({
             minChunkSize: 300000
         }),
+        // new BundleAnalyzerPlugin(), // Webpack bundle volume analysis
         new webpack.DefinePlugin({
             'process.env': {
                 USASPENDING_API: process.env.USASPENDING_API

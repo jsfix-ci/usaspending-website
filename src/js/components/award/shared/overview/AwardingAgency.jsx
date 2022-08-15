@@ -17,7 +17,7 @@ const AwardingAgency = ({ awardingAgency }) => {
     let innerComponent = awardingAgency.formattedToptier;
     if (awardingAgency.hasAgencyPage && awardingAgency.id) {
         innerComponent = (
-            <Link to={`/agency/${awardingAgency.id}`}>
+            <Link to={`/agency/${awardingAgency.agencySlug}`}>
                 {innerComponent}
             </Link>
         );

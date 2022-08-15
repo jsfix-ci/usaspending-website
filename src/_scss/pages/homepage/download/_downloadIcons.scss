@@ -32,10 +32,10 @@
         }
     }
 
-    &.#{$icon-class}_api {
+    &.#{$icon-class}_metadata {
         @include downloadSpritePos(0, 0);
     }
-    &.#{$icon-class}_api-active {
+    &.#{$icon-class}_metadata-active {
         @include downloadSpritePos(1, 0);
     }
 

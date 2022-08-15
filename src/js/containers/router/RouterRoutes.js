@@ -12,7 +12,6 @@ const ExplorerLanding = React.lazy(() => import('components/explorer/landing/Exp
 const ExplorerDetailPageContainer = React.lazy(() => import('containers/explorer/detail/ExplorerDetailPageContainer').then((comp) => comp));
 const AwardContainer = React.lazy(() => import('containers/award/AwardContainer').then((comp) => comp));
 const AccountContainer = React.lazy(() => import('containers/account/AccountContainer').then((comp) => comp));
-const AgencyContainer = React.lazy(() => import('containers/agency/AgencyContainer').then((comp) => comp));
 const About = React.lazy(() => import('components/about/About').then((comp) => comp));
 const AccessibilityPage = React.lazy(() => import('components/about/legal/AccessibilityPage').then((comp) => comp));
 const PrivacyPage = React.lazy(() => import('components/about/legal/PrivacyPage').then((comp) => comp));
@@ -26,7 +25,7 @@ const StateLandingPage = React.lazy(() => import('components/stateLanding/StateL
 const StateContainer = React.lazy(() => import('containers/state/StateContainer').then((comp) => comp));
 const RecipientLandingPage = React.lazy(() => import('components/recipientLanding/RecipientLandingPage').then((comp) => comp));
 const RecipientContainer = React.lazy(() => import('containers/recipient/RecipientContainer').then((comp) => comp));
-const AgencyProfileV2 = React.lazy(() => import('containers/agencyV2/AgencyContainerV2').then((comp) => comp));
+const AgencyProfile = React.lazy(() => import('containers/agency/AgencyContainer').then((comp) => comp));
 const DataSourcesAndMethodologiesPage = React.lazy(() => import('components/covid19/DataSourcesAndMethodologiesPage').then((comp) => comp));
 const OpportunityProjectPage = React.lazy(() => import('components/covid19/OpportunityProjectPage').then((comp) => comp));
 const Covid19Container = React.lazy(() => import('containers/covid19/Covid19Container').then((comp) => comp));
@@ -35,13 +34,15 @@ const AgencyDetailsPage = React.lazy(() => import('components/aboutTheData/Agenc
 const ErrorPage = React.lazy(() => import('components/errorPage/ErrorPage').then((comp) => comp));
 const SubmissionStatisticsDataSources = React.lazy(() => import('components/aboutTheData/DataSourcesAndMethodologiesPage').then((comp) => comp));
 const DataDictionaryPage = React.lazy(() => import('components/dataDictionary/DataDictionaryPage').then((comp) => comp));
+const AnalystGuidePage = React.lazy(() => import('components/analystGuide/AnalystGuidePage').then((comp) => comp));
+const EquityCovidSpendingPage = React.lazy(() => import('components/dataDives/EquityCovidSpendingPage').then((comp) => comp));
 
 // /* eslint-disable import/prefer-default-export */
 // Please add any new routes to the scripts/pages.js routes file.
 // eslint-disable-next-line import/prefer-default-export
 export const routes = [
     {
-        path: '/',
+        path: `/`,
         component: Homepage,
         exact: true
     },
@@ -73,11 +74,6 @@ export const routes = [
     {
         path: '/federal_account/:accountNumber',
         component: AccountContainer,
-        exact: true
-    },
-    {
-        path: '/agency/:agencyId',
-        component: AgencyContainer,
         exact: true
     },
     {
@@ -137,13 +133,13 @@ export const routes = [
         exact: true
     },
     {
-        // could be state name or fips code
+    // could be state name or fips code
         path: '/state/:state/:fy',
         component: StateContainer,
         exact: true
     },
     {
-        // could be state name or fips code
+    // could be state name or fips code
         path: '/state/:state',
         component: StateContainer,
         exact: true
@@ -169,8 +165,8 @@ export const routes = [
         exact: true
     },
     {
-        path: '/agency_v2/:agencySlug',
-        component: AgencyProfileV2,
+        path: '/agency/:agencySlug',
+        component: AgencyProfile,
         exact: true
     },
     {
@@ -206,6 +202,16 @@ export const routes = [
     {
         path: '/data-dictionary',
         component: DataDictionaryPage,
+        exact: true
+    },
+    {
+        path: '/analyst-guide',
+        component: AnalystGuidePage,
+        exact: true
+    },
+    {
+        path: '/data-dives/equity-COVID-19-spending',
+        component: EquityCovidSpendingPage,
         exact: true
     },
     {

@@ -84,7 +84,7 @@ export default class FedAccountTable extends React.Component {
             link = item.generatedId ? `award/${item.generatedId}` : null;
         }
         if (column === 'agency') {
-            link = item.fundingAgencyId ? `agency/${item.fundingAgencyId}` : null;
+            link = item.fundingAgencySlug ? `agency/${item.fundingAgencySlug}` : null;
         }
         if (column === 'fedAccount') {
             if (category === 'idv') {
@@ -95,7 +95,7 @@ export default class FedAccountTable extends React.Component {
             }
         }
         if (column === 'awardingAgencyName') {
-            link = item.awardingAgencyId ? `agency/${item.awardingAgencyId}` : null;
+            link = item.awardingAgencySlug ? `agency/${item.awardingAgencySlug}` : null;
         }
         return (
             <FederalAccountTableGenericCell

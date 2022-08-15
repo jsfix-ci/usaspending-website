@@ -2,6 +2,7 @@ const webpack = require('webpack');
 const path = require('path');
 const merge = require('webpack-merge');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+// const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 const common = require('./webpack.common');
 
 module.exports = merge(common, {
@@ -13,11 +14,13 @@ module.exports = merge(common, {
         }
     },
     devServer: {
-        contentBase: path.resolve(__dirname, "public"),
         host: "0.0.0.0", // this allows VMs to access the server
         port: 3000,
-        disableHostCheck: true,
-        historyApiFallback: true
+        allowedHosts: "all",
+        historyApiFallback: true,
+        static: {
+            directory: path.resolve(__dirname, "public"),
+        }
     },
     module: {
         rules: [
@@ -30,7 +33,9 @@ module.exports = merge(common, {
                         loader: "sass-loader",
                         options: {
                             sourceMap: true,
-                            includePaths: ["./src/_scss", "./node_modules"]
+                            sassOptions: {
+                                includePaths: ["./src/_scss", "./node_modules"]
+                            }
                         }
                     }
                 ]
@@ -38,6 +43,7 @@ module.exports = merge(common, {
         ]
     },
     plugins: [
+        // new BundleAnalyzerPlugin(), // Webpack bundle volume analysis
         new webpack.DefinePlugin({
             'process.env': {
                 USASPENDING_API: process.env.USASPENDING_API

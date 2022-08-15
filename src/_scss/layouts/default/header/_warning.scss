@@ -7,6 +7,9 @@
     .info-banner__content {
         @include display(flex);
         @include align-items(flex-start);
+        @media(max-width: $tablet-screen) {
+            margin: rem(12) rem(20);
+        }
         @media(min-width: $tablet-screen) {
             margin: rem(10) rem(25);
         }
@@ -48,6 +51,10 @@
                     padding: 0;
                     padding-left: rem(2);
                 }
+            }
+            a {
+                text-decoration: none;
+                cursor: pointer;
             }
         }
         .info-banner__description-external-link {

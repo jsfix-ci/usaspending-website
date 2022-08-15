@@ -10,12 +10,6 @@ import { Link } from 'react-router-dom';
 
 import { formatMoney } from 'helpers/moneyFormatter';
 
-const propTypes = {
-    data: PropTypes.object,
-    mouseIsInTooltipDiv: PropTypes.func,
-    mouseOutOfTooltipDiv: PropTypes.func
-};
-
 // current list of properties we might truncate
 const arrayOfProperties = [
     'recipientName',
@@ -24,7 +18,13 @@ const arrayOfProperties = [
     'parentAwardPIID'
 ];
 
-export default class IdvActivityTooltip extends React.Component {
+export default class ActivityChartTooltip extends React.Component {
+    static propTypes = {
+        data: PropTypes.object,
+        mouseIsInTooltipDiv: PropTypes.func,
+        mouseOutOfTooltipDiv: PropTypes.func
+    };
+
     constructor(props) {
         super(props);
 
@@ -60,18 +60,12 @@ export default class IdvActivityTooltip extends React.Component {
         window.removeEventListener('resize', this.measureWindow);
     }
 
-    getLinks(path, id, data, params) {
-        if (data === '--' || id === '--') {
+    getLinks(path, slug, data, params) {
+        if (data === '--' || !slug) {
             return (<div>{data}</div>);
         }
-        let title;
-        if (this.state.truncated) {
-            title = params;
-        }
         return (
-            <Link
-                title={title}
-                to={`/${path}/${id}`}>
+            <Link title={this.state.truncated ? params : ''} to={`/${path}/${slug}`}>
                 {data}
             </Link>
         );
@@ -101,8 +95,8 @@ export default class IdvActivityTooltip extends React.Component {
     // TruncatedDivWidth / NormalDivWidth =
     // x ( Truncated character length ) / NormalCharacterLength
     truncatedCharacterLength(truncatedDivWidth, normalDivWidth, normalCharacterLength) {
-        // return Math.floor(
-        //     ((truncatedDivWidth * normalCharacterLength) / normalDivWidth) / 2);
+    // return Math.floor(
+    //     ((truncatedDivWidth * normalCharacterLength) / normalDivWidth) / 2);
         return Math.floor(
             ((truncatedDivWidth * normalCharacterLength) / normalDivWidth));
     }
@@ -119,11 +113,11 @@ export default class IdvActivityTooltip extends React.Component {
     }
 
     decideOnTooltipWidth(arrayOfDivWidths, tooltipWidth) {
-        // get truncated widths of the first two rows
-        // add padding for the first two rows
-        // compare the length of all three rows
-        // return the new tooltip width
-        // decide if there is a granparent div
+    // get truncated widths of the first two rows
+    // add padding for the first two rows
+    // compare the length of all three rows
+    // return the new tooltip width
+    // decide if there is a granparent div
         const truncatedWidths = arrayOfDivWidths.map((divWidth) => this.truncatedWidth(
             this.props.data.graphWidth, tooltipWidth, divWidth));
         let firstRowWidth = truncatedWidths[0] + truncatedWidths[1];
@@ -179,7 +173,7 @@ export default class IdvActivityTooltip extends React.Component {
     }
 
     async positionTooltip() {
-        // award bar info ( BaseIdvActivityBar ) and data needed to display correctly
+    // award bar info ( BaseIdvActivityBar ) and data needed to display correctly
         const { data } = this.props;
         // measure the tooltip width
         // the two divs below make up the second row of the tooltip, the longest row
@@ -368,7 +362,7 @@ export default class IdvActivityTooltip extends React.Component {
                                     {
                                         this.getLinks(
                                             'agency',
-                                            data.awardingAgencyId,
+                                            data.awardingAgencySlug,
                                             this.state.awardingAgencyName,
                                             data.awardingAgencyName
                                         )
@@ -441,5 +435,3 @@ export default class IdvActivityTooltip extends React.Component {
         );
     }
 }
-
-IdvActivityTooltip.propTypes = propTypes;

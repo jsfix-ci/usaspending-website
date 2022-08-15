@@ -6,8 +6,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { uniqueId } from 'lodash';
-
-import { AngleLeft, AngleRight } from 'components/sharedComponents/icons/Icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const propTypes = {
     images: PropTypes.array.isRequired
@@ -77,8 +76,8 @@ export default class ImageCarousel extends React.Component {
     }
 
     startedMouseDrag(e) {
-        // stop the browser from trying to drag the image for saving
-        // or whatever native drag behavior
+    // stop the browser from trying to drag the image for saving
+    // or whatever native drag behavior
         e.preventDefault();
         this.setState({
             isDragging: true
@@ -108,12 +107,12 @@ export default class ImageCarousel extends React.Component {
     }
 
     commonDragLogic(xPos) {
-        // determine how much we have moved the cursor
+    // determine how much we have moved the cursor
         const change = xPos - this._lastDragX;
         this._lastDragX = xPos;
 
         // change the carousel translation by the same amount
-        this._currentX = this._currentX + change;
+        this._currentX += change;
         this.carouselList.style.transform = `translate(${this._currentX}px, 0px)`;
     }
 
@@ -263,7 +262,7 @@ export default class ImageCarousel extends React.Component {
                         aria-hidden={this.state.page === 1}
                         disabled={this.state.page === 1}
                         onClick={this.previousItem}>
-                        <AngleLeft alt="Previous carousel item" />
+                        <FontAwesomeIcon size="lg" icon="chevron-left" />
                     </button>
                     <div
                         className="feature-carousel-image"
@@ -294,7 +293,7 @@ export default class ImageCarousel extends React.Component {
                         aria-hidden={this.state.page === this.props.images.length}
                         disabled={this.state.page === this.props.images.length}
                         onClick={this.nextItem}>
-                        <AngleRight alt="Next carousel item" />
+                        <FontAwesomeIcon size="lg" icon="chevron-right" />
                     </button>
                 </div>
                 <div className="feature-carousel-pager">
