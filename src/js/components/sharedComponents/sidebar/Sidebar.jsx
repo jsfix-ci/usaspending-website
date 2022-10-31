@@ -56,6 +56,94 @@ const Sidebar = ({
     const [sidebarWidth, setSidebarWidth] = useState("auto");
     const [isSidebarSticky, , , handleScroll] = useDynamicStickyClass(referenceDiv, fixedStickyBreakpoint);
     const [activeSection, setActiveSection] = useState(active || sections[0].section);
+    const [observerSupported, setObserverSupported] = useState(false);
+
+    /* new code  */
+    const options = {
+        root: null,
+        rootMargin: '0px',
+        threshold: [...Array(100).keys()].map((x) => x / 100)
+    };
+
+    // eslint-disable-next-line no-return-assign,no-param-reassign
+    let previousY = sections.reduce((result, item) => ((result[item.anchor] = 0), result),
+        {}
+    );
+
+    useEffect(() => {
+        console.log(activeSection)
+    }, [activeSection]);
+
+    // eslint-disable-next-line consistent-return
+    useEffect(() => {
+        setObserverSupported('IntersectionObserver' in window);
+
+        if (observerSupported) {
+            // eslint-disable-next-line no-undef
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    const ratio = entry.intersectionRatio;
+                    const boundingRect = entry.boundingClientRect;
+                    const section = entry.target.id.replace('about-', '');
+                    // const isScrollingDown = previousY[section] > boundingRect.y;
+
+                    let topThreshold = 15;
+                    let bottomThreshold = 0;
+
+                    // const newMode = checkScreenMode(window.innerWidth);
+                    //
+                    // if (newMode !== screenMode) {
+                    //     setScreenMode(newMode);
+                    // }
+                    //
+                    // if (newMode !== ScreenModeEnum.desktop) {
+                    //     topThreshold = 80;
+                    //     bottomThreshold = 95;
+                    // }
+
+                    const inView =
+                        boundingRect.top < topThreshold &&
+                        boundingRect.bottom > bottomThreshold;
+
+                    if (entry.isIntersecting && ratio < 1 && inView) {
+                        setActiveSection(section);
+                    }
+
+                    previousY = {
+                        ...previousY,
+                        [section]: boundingRect.y
+                    };
+                });
+            }, options);
+
+            sections.forEach((section) => {
+                const target = document.getElementById(`section-${section.anchor}`);
+                if (target) {
+                    observer.observe(target);
+                }
+            });
+
+            // document
+            //     .getElementById('scroll-to-top')
+            //     .addEventListener('click', () => {
+            //         setActiveSection(sections[0].anchor);
+            //     });
+
+            // give the observers a chance to set the activeSection before setting it
+            // to default
+            setTimeout(() => {
+                if (!activeSection) {
+                    setActiveSection(sections[0].anchor);
+                }
+            }, 100);
+
+            return () => observer.disconnect();
+        }
+    }, [observerSupported]);
+
+
+    /* new code end */
+
 
     useEffect(() => {
         const updateSidebarWidth = throttle(() => {
