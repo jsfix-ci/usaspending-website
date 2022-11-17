@@ -124,8 +124,8 @@ export default () => {
     const [errorMsg, isLoading, defCodes] = useDefCodes();
     const [activeSection, setActiveSection] = useState(sections[0].section);
     const dataDisclaimerBannerRef = useRef(null);
-    const [dataDisclaimerBanner, setDataDisclaimerBanner] = useState(Cookies.get('usaspending_data_disclaimer'));
-    const [isBannerSticky, , , setBannerStickyOnScroll] = useDynamicStickyClass(dataDisclaimerBannerRef, getStickyBreakPointForCovidBanner(Cookies.get('usaspending_covid_homepage')));
+    const [dataDisclaimerBanner, setDataDisclaimerBanner] = useState(JSON.parse(Cookies.get('usaspending_data_disclaimer')));
+    const [isBannerSticky, , , setBannerStickyOnScroll] = useDynamicStickyClass(dataDisclaimerBannerRef, getStickyBreakPointForCovidBanner(JSON.parse(Cookies.get('usaspending_covid_homepage'))));
     const [covidDefCodes, setCovidDefCodes] = useState();
 
     useEffect(() => {

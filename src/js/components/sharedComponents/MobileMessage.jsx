@@ -9,23 +9,23 @@ import Cookies from 'js-cookie';
 const cookie = 'usaspending_mobile_view_disclaimer';
 
 const MobileMessage = () => {
-    const [hideMessage, setHideMessage] = useState(Cookies.get(cookie));
+    const [hideMessage, setHideMessage] = useState(JSON.parse(Cookies.get(cookie)));
     const onClick = () => {
-        Cookies.set(cookie, { expires: 1 });
+        Cookies.set(cookie, JSON.stringify({ expires: 1 }));
         setHideMessage('hide');
     };
     // remove disclaimer if user switches out of mobile viewport
     const watchWidth = () => {
         if (window.outerWidth >= 568) {
-            Cookies.set(cookie, { expires: 1 });
+            Cookies.set(cookie, JSON.stringify({ expires: 1 }));
             setHideMessage('hide');
         }
     };
     // remove disclaimer after 5 seconds
     useEffect(() => {
-        if (Cookies.get(cookie) !== 'hide') {
+        if (JSON.parse(Cookies.get(cookie)) !== 'hide') {
             setTimeout(() => {
-                Cookies.set(cookie, { expires: 1 });
+                Cookies.set(cookie, JSON.stringify({ expires: 1 }));
                 setHideMessage('hide');
             }, 10000);
         }
