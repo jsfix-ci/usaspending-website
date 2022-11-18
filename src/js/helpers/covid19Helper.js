@@ -24,7 +24,7 @@ export const fetchOpportunityTotals = (code) => apiRequest({
 });
 
 export const getStickyBreakPointForCovidBanner = () => {
-    const isGlobalBannerHidden = Cookies.get(globalCovidBannerCookie) === 'hide';
+    const isGlobalBannerHidden = JSON.parse(Cookies.get(globalCovidBannerCookie)) === 'hide';
     if (isGlobalBannerHidden) {
         return 97;
     }
@@ -32,8 +32,8 @@ export const getStickyBreakPointForCovidBanner = () => {
 };
 
 export const getVerticalOffset = () => {
-    const isGlobalBannerHidden = Cookies.get(globalCovidBannerCookie) === 'hide';
-    const isCovidBannerHidden = Cookies.get(dataDisclaimerBannerCookie) === 'hide';
+    const isGlobalBannerHidden = JSON.parse(Cookies.get(globalCovidBannerCookie)) === 'hide';
+    const isCovidBannerHidden = JSON.parse(Cookies.get(dataDisclaimerBannerCookie)) === 'hide';
     const stickyHeaderThreshold = isGlobalBannerHidden ? 97 : 97 + globalBannerHeight;
     const scrollPosition = window.scrollY || window.pageYOffset;
     const isHeaderSticky = scrollPosition >= stickyHeaderThreshold;

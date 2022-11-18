@@ -55,7 +55,7 @@ export default class GeoVisualizationSection extends React.Component {
 
     componentDidMount() {
     // check if the disclaimer cookie exists
-        if (!Cookies.get('usaspending_search_map_disclaimer')) {
+        if (!JSON.parse(Cookies.get('usaspending_search_map_disclaimer'))) {
             // cookie does not exist, show the disclaimer
             this.showDisclaimer();
         }

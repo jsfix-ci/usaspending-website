@@ -5,7 +5,7 @@ import { globalBannerHeight } from 'dataMapping/stickyHeader/stickyHeader';
 import { globalCovidBannerCookie } from 'dataMapping/covid19/covid19';
 
 export const getStickyBreakPointForSidebar = () => {
-    const isGlobalBannerHidden = Cookies.get(globalCovidBannerCookie) === 'hide';
+    const isGlobalBannerHidden = JSON.parse(Cookies.get(globalCovidBannerCookie)) === 'hide';
 
     if (isGlobalBannerHidden) {
         return 97;
